@@ -3,273 +3,852 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Programme des Vacances - Aqua 3D</title>
+
+<title>GRÂCE_LE_KG_ZFR • Aqua 3D</title>
+
 <style>
-/* FOND ET RÉSOUDRE LE SCROLL */
-body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    background: radial-gradient(circle at 50% 50%, #1a365d 0%, #0f172a 100%);
-    color: white;
-    min-height: 100vh;
-    overflow-x: hidden;
-    position: relative;
-    perspective: 1000px; /* Permet les effets 3D CSS */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
-.container {
-    max-width: 800px;
-    margin: auto;
-    padding: 20px;
-    position: relative;
-    z-index: 2;
+body{
+
+font-family:
+-apple-system,
+BlinkMacSystemFont,
+Segoe UI,
+sans-serif;
+
+background:
+
+radial-gradient(circle at center,
+#1d4e89 0%,
+#09111f 100%);
+
+min-height:100vh;
+
+overflow-x:hidden;
+
+color:white;
+
+perspective:1500px;
+
+transform-style:
+preserve-3d;
+
 }
 
-h1 {
-    text-align: center;
-    font-size: 32px;
-    letter-spacing: 2px;
-    text-shadow: 0 0 20px rgba(0, 198, 255, 0.6);
+/* particules */
+
+body::before{
+
+content:"";
+
+position:fixed;
+
+inset:0;
+
+background:
+
+radial-gradient(
+rgba(255,255,255,.18) 2px,
+transparent 2px);
+
+background-size:
+80px 80px;
+
+opacity:.15;
+
+animation:
+stars 35s linear infinite;
+
+pointer-events:none;
+
 }
 
-/* 🔹 PANNEAUX EN 3D CSS ET GLASSMORPHISM */
-.section {
-    background: rgba(255, 255, 255, 0.07);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    padding: 25px;
-    margin-top: 30px;
-    /* Border-radius élevé */
-    border-radius: 30px; 
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), 
-                inset 0 4px 10px rgba(255, 255, 255, 0.1);
-    /* Effet de relief 3D au survol/toucher */
-    transform: style 3d;
-    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+@keyframes stars{
+
+from{
+
+transform:
+translateY(0);
+
 }
 
-.section:hover {
-    transform: translateY(-5px) rotateX(4deg) rotateY(-2deg);
+to{
+
+transform:
+translateY(-250px);
+
 }
 
-h2 {
-    color: #00c6ff;
-    font-size: 22px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
 }
 
-/* 🔹 LIQUID UI (Effet eau enfermée dans les listes) */
-li, .objectif {
-    padding: 14px;
-    margin: 10px 0;
-    background: rgba(0, 198, 255, 0.1);
-    /* Border-radius élevé pour style liquide */
-    border-radius: 20px; 
-    border: 1px solid rgba(0, 198, 255, 0.2);
-    position: relative;
-    overflow: hidden;
+.container{
+
+max-width:900px;
+
+margin:auto;
+
+padding:30px;
+
+position:relative;
+
+z-index:10;
+
 }
 
-/* Vague d'eau en arrière-plan animée fluide */
-li::before, .objectif::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: rgba(0, 198, 255, 0.15);
-    border-radius: 40%;
-    animation: wave 6s infinite linear;
-    pointer-events: none;
-    z-index: 0;
+.canvas-container{
+
+display:flex;
+
+justify-content:center;
+
+margin-bottom:25px;
+
 }
 
-@keyframes wave {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+/* SOLEIL */
+
+.soleil-3d{
+
+width:150px;
+
+height:150px;
+
+border-radius:50%;
+
+background:
+
+radial-gradient(
+
+circle at 30% 30%,
+
+#fff7b0 0%,
+
+#ffd500 20%,
+
+#ff9600 60%,
+
+#ff4d00 100%
+
+);
+
+box-shadow:
+
+0 0 40px orange,
+
+0 0 80px #ff9600,
+
+0 0 120px #ff6a00,
+
+inset -15px -15px 30px rgba(0,0,0,.35);
+
+cursor:grab;
+
+transform-style:
+preserve-3d;
+
+transition:
+transform .15s;
+
+animation:
+pulse 4s infinite alternate;
+
 }
 
-span { position: relative; z-index: 1; }
+@keyframes pulse{
 
-/* 🔹 BOUTON LIQUIDE ET VERRE 3D */
-button {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border: 2px solid rgba(0, 198, 255, 0.4);
-    border-radius: 40px;
-    color: white;
-    padding: 16px 45px;
-    cursor: pointer;
-    font-size: 18px;
-    font-weight: bold;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 10px 25px rgba(0, 198, 255, 0.3), 
-                inset 0 4px 4px rgba(255, 255, 255, 0.2);
-    transition: all 0.3s ease;
+from{
+
+transform:
+scale(1);
+
 }
 
-button:hover {
-    transform: scale(1.05) translateY(-3px);
-    box-shadow: 0 15px 30px rgba(0, 198, 255, 0.5);
+to{
+
+transform:
+scale(1.05);
+
 }
 
-/* 🔹 INTERFACE SOLEIL 3D INTERACTIF */
-.canvas-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 20px 0;
 }
 
-/* Sphère 3D pure CSS que l'on peut faire tourner */
-.soleil-3d {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%, #ffdf00, #ff5e00);
-    box-shadow: 0 0 40px #ff9f00, inset -20px -20px 40px rgba(0,0,0,0.4);
-    cursor: grab;
-    transition: transform 0.1s linear;
+h1{
+
+text-align:center;
+
+font-size:34px;
+
+letter-spacing:2px;
+
+margin-bottom:30px;
+
+text-shadow:
+
+0 0 25px cyan;
+
 }
 
-.soleil-3d:active { cursor: grabbing; }
+/* PANNEAUX */
 
-/* Animation des bulles d'eau qui éclatent */
-.bulle-eau {
-    position: absolute;
-    background: radial-gradient(circle, rgba(0,198,255,0.6) 0%, rgba(255,255,255,0) 70%);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-    pointer-events: none;
-    transform: translate(-50%, -50%);
-    animation: eclatement 0.6s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
-    z-index: 9999;
+.section{
+
+position:relative;
+
+overflow:hidden;
+
+padding:25px;
+
+margin-bottom:25px;
+
+border-radius:35px;
+
+background:
+
+linear-gradient(
+
+135deg,
+
+rgba(255,255,255,.14),
+
+rgba(255,255,255,.04)
+
+);
+
+backdrop-filter:
+blur(20px);
+
+-webkit-backdrop-filter:
+blur(20px);
+
+border:
+
+1px solid rgba(255,255,255,.2);
+
+box-shadow:
+
+0 20px 45px rgba(0,0,0,.35),
+
+inset 0 2px 8px rgba(255,255,255,.2);
+
+transform-style:
+preserve-3d;
+
+transition:
+0.4s;
+
 }
 
-@keyframes eclatement {
-    0% { width: 0px; height: 0px; opacity: 1; }
-    100% { width: 150px; height: 150px; opacity: 0; }
+.section:hover{
+
+transform:
+
+translateY(-6px)
+
+rotateX(4deg)
+
+rotateY(-2deg);
+
 }
 
-.footer { text-align: center; margin-top: 40px; opacity: 0.6; font-size: 14px; }
+.section::before{
+
+content:"";
+
+position:absolute;
+
+width:200%;
+
+height:200%;
+
+top:-50%;
+
+left:-50%;
+
+background:
+
+radial-gradient(
+
+circle,
+
+rgba(255,255,255,.18),
+
+transparent 60%
+
+);
+
+animation:
+liquid 12s linear infinite;
+
+}
+
+@keyframes liquid{
+
+from{
+
+transform:
+rotate(0deg);
+
+}
+
+to{
+
+transform:
+rotate(360deg);
+
+}
+
+}
+
+h2{
+
+position:relative;
+
+z-index:2;
+
+font-size:22px;
+
+color:#5bdcff;
+
+margin-bottom:15px;
+
+}
+
+ul{
+
+list-style:none;
+
+}
+
+li{
+
+position:relative;
+
+padding:16px;
+
+margin:12px 0;
+
+border-radius:22px;
+
+overflow:hidden;
+
+background:
+
+rgba(0,198,255,.08);
+
+border:
+
+1px solid rgba(0,198,255,.2);
+
+}
+
+li::before{
+
+content:"";
+
+position:absolute;
+
+top:50%;
+
+left:-50%;
+
+width:200%;
+
+height:200%;
+
+border-radius:40%;
+
+background:
+
+rgba(0,198,255,.12);
+
+animation:
+wave 7s linear infinite;
+
+}
+
+@keyframes wave{
+
+from{
+
+transform:
+rotate(0deg);
+
+}
+
+to{
+
+transform:
+rotate(360deg);
+
+}
+
+}
+
+span{
+
+position:relative;
+
+z-index:5;
+
+}
+
+.objectif{
+
+position:relative;
+
+padding:16px;
+
+margin:12px 0;
+
+border-radius:22px;
+
+background:
+
+rgba(0,198,255,.08);
+
+border:
+
+1px solid rgba(0,198,255,.2);
+
+overflow:hidden;
+
+}
+
+button{
+
+padding:
+
+18px 45px;
+
+border:none;
+
+border-radius:50px;
+
+background:
+
+rgba(255,255,255,.12);
+
+backdrop-filter:
+blur(15px);
+
+color:white;
+
+font-size:18px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+box-shadow:
+
+0 8px 25px rgba(0,198,255,.4),
+
+inset 0 2px 5px rgba(255,255,255,.4),
+
+inset 0 -3px 8px rgba(0,0,0,.2);
+
+transition:
+.3s;
+
+}
+
+button:hover{
+
+transform:
+
+translateY(-4px)
+
+scale(1.05);
+
+}
+
+.footer{
+
+text-align:center;
+
+margin-top:40px;
+
+opacity:.6;
+
+font-size:14px;
+
+}
+
+/* bulles */
+
+.bulle-eau{
+
+position:absolute;
+
+border-radius:50%;
+
+pointer-events:none;
+
+background:
+
+radial-gradient(
+
+circle,
+
+rgba(0,198,255,.7),
+
+transparent
+
+);
+
+animation:
+explode .7s forwards;
+
+z-index:9999;
+
+}
+
+@keyframes explode{
+
+0%{
+
+width:0;
+
+height:0;
+
+opacity:1;
+
+}
+
+100%{
+
+width:160px;
+
+height:160px;
+
+opacity:0;
+
+}
+
+}
+
 </style>
+
 </head>
+
 <body>
 
 <div class="container">
-    
-    <!-- Zone du soleil interactif 3D -->
-    <div class="canvas-container">
-        <div class="soleil-3d" id="soleil"></div>
-    </div>
 
-    <h1>🌞 PROGRAMME DES VACANCES 🌞</h1>
+<div class="canvas-container">
 
-    <div class="section">
-        <h2>📱<span>Jeux et Tablettes</span></h2>
-        <ul>
-            <li><span>Mercredi : 12h00 – 18h00</span></li>
-            <li><span>Vendredi : 11h00 – 15h00</span></li>
-            <li><span>Samedi et Dimanche : 11h00 – 17h00</span></li>
-        </ul>
-    </div>
+<div
+class="soleil-3d"
+id="soleil"></div>
 
-    <div class="section">
-        <h2>📚<span>Activités éducatives</span></h2>
-        <ul>
-            <li><span>Lundi : Lecture – Sport – Méditation</span></li>
-            <li><span>Mardi : Lecture – Sport – Méditation</span></li>
-            <li><span>Jeudi : Lecture – Sport – Méditation</span></li>
-        </ul>
-    </div>
+</div>
 
-    <div class="section">
-        <h2>📜<span>Règlement</span></h2>
-        <p><span>Les jeux vidéo et les tablettes sont autorisés uniquement aux horaires indiqués. En dehors de ces périodes, les appareils doivent être rangés.</span></p>
-    </div>
+<h1>
 
-    <div class="section">
-        <h2>🎯<span>Objectifs</span></h2>
-        <div class="objectif"><span>✔ Développer le goût de la lecture</span></div>
-        <div class="objectif"><span>✔ Pratiquer une activité physique</span></div>
-        <div class="objectif"><span>✔ Mieux gérer le temps d'écran</span></div>
-    </div>
+🌞 PROGRAMME DES VACANCES 🌞
 
-    <br><center>
-        <button onclick="alert('Bonnes vacances technologiques ! 🌊🚀')">
-            Commencer les vacances
-        </button>
-    </center>
+</h1>
 
-    <div class="footer">
-        GRÂCE_LE_KG_ZFR © 2026
-    </div>
+<div class="section">
+
+<h2>
+
+📱 Jeux et Tablettes
+
+</h2>
+
+<ul>
+
+<li>
+
+<span>
+
+Mercredi : 12h00 – 18h00
+
+</span>
+
+</li>
+
+<li>
+
+<span>
+
+Vendredi : 11h00 – 15h00
+
+</span>
+
+</li>
+
+<li>
+
+<span>
+
+Samedi et Dimanche :
+11h00 – 17h00
+
+</span>
+
+</li>
+
+</ul>
+
+</div>
+
+<div class="section">
+
+<h2>
+
+📚 Activités éducatives
+
+</h2>
+
+<ul>
+
+<li>
+
+<span>
+
+Lundi :
+Lecture – Sport – Méditation
+
+</span>
+
+</li>
+
+<li>
+
+<span>
+
+Mardi :
+Lecture – Sport – Méditation
+
+</span>
+
+</li>
+
+<li>
+
+<span>
+
+Jeudi :
+Lecture – Sport – Méditation
+
+</span>
+
+</li>
+
+</ul>
+
+</div>
+
+<div class="section">
+
+<h2>
+
+🎯 Objectifs
+
+</h2>
+
+<div class="objectif">
+
+✔ Développer la lecture
+
+</div>
+
+<div class="objectif">
+
+✔ Faire du sport
+
+</div>
+
+<div class="objectif">
+
+✔ Réduire le temps d'écran
+
+</div>
+
+</div>
+
+<center>
+
+<button onclick="alert('Bonnes vacances 🚀🌊')">
+
+Commencer
+
+</button>
+
+</center>
+
+<div class="footer">
+
+GRÂCE_LE_KG_ZFR © 2026
+
+</div>
+
 </div>
 
 <script>
-// EFFET BULLES D'EAU FLUIDES AU CLIC
-document.addEventListener('click', function(e) {
-    if(e.target.id === 'soleil') return; // Évite les conflits avec le soleil
-    const b = document.createElement('div');
-    b.classList.add('bulle-eau');
-    b.style.left = e.clientX + window.scrollX + 'px';
-    b.style.top = e.clientY + window.scrollY + 'px';
-    document.body.appendChild(b);
-    setTimeout(() => { b.remove(); }, 600);
-});
 
-// FAIT TOURNER LE SOLEIL EN 3D AU TOUCHER / SOURIS
-const soleil = document.getElementById('soleil');
-let isDragging = false;
-let previousX = 0;
-let previousY = 0;
-let rotationX = 0;
-let rotationY = 0;
+document.addEventListener(
 
-function startDrag(e) {
-    isDragging = true;
-    const pageX = e.pageX || e.touches[0].pageX;
-    const pageY = e.pageY || e.touches[0].pageY;
-    previousX = pageX;
-    previousY = pageY;
+'click',
+
+e=>{
+
+if(e.target.id==='soleil')
+
+return;
+
+const b=document.createElement('div');
+
+b.className='bulle-eau';
+
+b.style.left=e.pageX+'px';
+
+b.style.top=e.pageY+'px';
+
+document.body.appendChild(b);
+
+setTimeout(
+
+()=>b.remove(),
+
+700
+
+);
+
 }
 
-function moveDrag(e) {
-    if (!isDragging) return;
-    const pageX = e.pageX || e.touches[0].pageX;
-    const pageY = e.pageY || e.touches[0].pageY;
-    let deltaX = pageX - previousX;
-    let deltaY = pageY - previousY;
-    
-    rotationY += deltaX * 0.5;
-    rotationX -= deltaY * 0.5;
-    
-    // Application de la rotation 3D
-    soleil.style.transform = `rotateX(${rotationX}deg) rotateY(${rotationY}deg) scale(1.1)`;
-    
-    previousX = pageX;
-    previousY = pageY;
+);
+
+const soleil=
+
+document.getElementById(
+
+'soleil'
+
+);
+
+let drag=false;
+
+let px=0;
+
+let py=0;
+
+let rx=0;
+
+let ry=0;
+
+function start(e){
+
+drag=true;
+
+px=e.pageX||
+
+e.touches[0].pageX;
+
+py=e.pageY||
+
+e.touches[0].pageY;
+
 }
 
-function stopDrag() {
-    isDragging = false;
-    soleil.style.transform = `rotateX(${rotationX}deg) rotateY(${rotationY}deg) scale(1)`;
+function move(e){
+
+if(!drag)
+
+return;
+
+let x=e.pageX||
+
+e.touches[0].pageX;
+
+let y=e.pageY||
+
+e.touches[0].pageY;
+
+ry+=(x-px)*0.5;
+
+rx-=(y-py)*0.5;
+
+soleil.style.transform=
+
+`rotateX(${rx}deg)
+ rotateY(${ry}deg)
+ scale(1.05)`;
+
+px=x;
+
+py=y;
+
 }
 
-// Événements Tactiles (Mobile) et Souris (PC)
-soleil.addEventListener('mousedown', startDrag);
-window.addEventListener('mousemove', moveDrag);
-window.addEventListener('mouseup', stopDrag);
+function stop(){
 
-soleil.addEventListener('touchstart', startDrag);
-window.addEventListener('touchmove', moveDrag);
-window.addEventListener('touchend', stopDrag);
+drag=false;
+
+}
+
+soleil.addEventListener(
+
+'mousedown',
+
+start
+
+);
+
+window.addEventListener(
+
+'mousemove',
+
+move
+
+);
+
+window.addEventListener(
+
+'mouseup',
+
+stop
+
+);
+
+soleil.addEventListener(
+
+'touchstart',
+
+start
+
+);
+
+window.addEventListener(
+
+'touchmove',
+
+move
+
+);
+
+window.addEventListener(
+
+'touchend',
+
+stop
+
+);
+
 </script>
+
 </body>
+
 </html>
+EOFgit add index.html
+git commit -m "Optimisation globale du code et ajout du style KG_ZFR"
+git push origin main
+
