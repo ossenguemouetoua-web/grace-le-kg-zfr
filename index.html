@@ -3,375 +3,444 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Programme des vacances">
-<meta name="theme-color" content="#11141A">
-<title>Programme des vacances</title>
+<meta name="description" content="Programme des vacances - Édition Constellation">
+<meta name="theme-color" content="#0E1116">
+<title>Programme des vacances • Constellation Élite</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
     --ink: #0E1116;
     --paper: #EDE8DD;
     --paper-dim: #B9B3A4;
-    --brass: #B8923F;
-    --brass-soft: rgba(184,146,63,.35);
-    --line: rgba(237,232,221,.14);
+    --gold: #B8923F;
+    --gold-bright: #E3C470;
+    --line: rgba(237, 232, 221, 0.07);
 }
 
 *{ margin:0; padding:0; box-sizing:border-box; }
-
-html{ scroll-behavior:smooth; }
+html{ scroll-behavior: smooth; }
 
 body{
-    font-family:'Inter', sans-serif;
     background: var(--ink);
+    font-family: 'Inter', sans-serif;
     color: var(--paper);
-    min-height:100vh;
-    overflow-x:hidden;
-    line-height:1.5;
+    overflow-x: hidden;
+    min-height: 100vh;
+    line-height: 1.6;
 }
 
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    background-image:
-        linear-gradient(var(--line) 1px, transparent 1px),
-        linear-gradient(90deg, var(--line) 1px, transparent 1px);
-    background-size: 64px 64px;
-    opacity:.25;
-    pointer-events:none;
+canvas{
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
 }
 
 .wrap{
-    max-width:760px;
-    margin:auto;
-    padding: 64px 28px 80px;
-    position:relative;
+    max-width: 840px;
+    margin: auto;
+    padding: 80px 24px;
 }
 
-header{ margin-bottom:56px; }
+header{ margin-bottom: 48px; position: relative; }
 
 .eyebrow{
-    font-size:12px;
-    letter-spacing:.18em;
-    text-transform:uppercase;
-    color: var(--brass);
-    margin-bottom:18px;
-    display:flex;
-    align-items:center;
-    gap:12px;
-}
-
-.eyebrow::after{
-    content:"";
-    flex:1;
-    height:1px;
-    background: var(--line);
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+    font-weight: 500;
 }
 
 h1{
-    font-family:'Newsreader', serif;
-    font-weight:500;
-    font-size: clamp(34px, 7vw, 52px);
-    letter-spacing:-0.01em;
+    font-family: 'Newsreader', serif;
+    font-size: clamp(38px, 7vw, 56px);
+    font-weight: 400;
+    letter-spacing: -0.02em;
     color: var(--paper);
-    margin-bottom:10px;
+    line-height: 1.1;
+    margin-bottom: 8px;
 }
 
 .sous-titre{
-    font-size:15px;
+    font-family: 'Newsreader', serif;
+    font-style: italic;
     color: var(--paper-dim);
-    max-width:46ch;
+    font-size: 16px;
 }
 
-.cadran-zone{
-    display:flex;
-    justify-content:flex-end;
-    margin-top:-92px;
-    margin-bottom:8px;
+/* Bandeau temporel premium */
+.meta-bar{
+    margin-top: 32px;
+    padding: 20px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.012);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
-.cadran{
-    width:84px;
-    height:84px;
-    border-radius:50%;
-    border:1px solid var(--brass-soft);
-    position:relative;
-    cursor:grab;
-    touch-action:none;
-    background: radial-gradient(circle at 50% 50%, transparent 60%, rgba(184,146,63,.08) 100%);
+.meta-group{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }
 
-.cadran:active{ cursor:grabbing; }
-
-.cadran::before{
-    content:"";
-    position:absolute;
-    top:50%; left:50%;
-    width:1px;
-    height:34px;
-    background: var(--brass);
-    transform-origin: top center;
-    /* Utilise la variable CSS pour une rotation fluide en 60 FPS */
-    transform: translate(-50%, 0) rotate(var(--angle, 0deg));
+.meta-bar .label{
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--paper-dim);
 }
 
-.cadran::after{
-    content:"";
-    position:absolute;
-    top:50%; left:50%;
-    width:5px;
-    height:5px;
-    border-radius:50%;
-    background: var(--brass);
-    transform: translate(-50%, -50%);
+.meta-bar .value{
+    font-family: 'Newsreader', serif;
+    font-variant-numeric: tabular-nums;
+    color: var(--gold);
+    font-size: 19px;
 }
 
-section{ margin-bottom:48px; }
-
-.section-tete{
-    display:flex;
-    align-items:baseline;
-    gap:14px;
-    margin-bottom:20px;
-    padding-bottom:10px;
-    border-bottom:1px solid var(--line);
+.planning-grid{
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    margin-top: 40px;
 }
 
-.section-num{
-    font-family:'Newsreader', serif;
-    font-style:italic;
-    color: var(--brass);
-    font-size:15px;
+/* Cartes Holographiques Cyber-Luxe */
+.card{
+    background: rgba(255, 255, 255, 0.015);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--line);
+    padding: 32px;
+    border-radius: 24px;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s, box-shadow 0.4s;
+}
+
+.card:hover{
+    transform: translateY(-5px);
+    border-color: rgba(184, 146, 63, 0.35);
+    box-shadow: 0 15px 35px rgba(184, 146, 63, 0.03);
 }
 
 h2{
-    font-family:'Newsreader', serif;
-    font-weight:500;
-    font-size:21px;
-    letter-spacing:.01em;
+    font-family: 'Newsreader', serif;
+    font-size: 25px;
+    font-weight: 400;
+    margin-bottom: 18px;
+    color: var(--paper);
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 14px;
 }
 
-.agenda{ list-style:none; }
+.agenda-list{ list-style: none; }
 
-.agenda li{
-    display:flex;
-    justify-content:space-between;
-    align-items:baseline;
-    gap:16px;
-    padding:14px 2px;
-    border-bottom:1px dashed var(--line);
-    font-size:15px;
+.agenda-list li{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 14px 0;
+    border-bottom: 1px dashed var(--line);
+    font-size: 15px;
 }
+.agenda-list li:last-child{ border-bottom: none; }
 
-.agenda li:last-child{ border-bottom:none; }
-
-.jour{ color: var(--paper); font-weight:500; flex-shrink:0; }
-
-.horaire{
+.agenda-list .time{
     color: var(--paper-dim);
     font-variant-numeric: tabular-nums;
-    text-align:right;
+    text-align: right;
 }
 
-.objectifs{ list-style:none; display:flex; flex-direction:column; }
+.objectifs-list{ list-style: none; }
+.objectifs-list li{
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px dashed var(--line);
+    font-size: 15px;
+}
+.objectifs-list li:last-child{ border-bottom: none; }
 
-.objectifs li{
-    display:flex;
-    align-items:flex-start;
-    gap:14px;
-    padding:14px 0;
-    border-bottom:1px dashed var(--line);
-    font-size:15px;
-    color: var(--paper);
+.dot{
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--gold);
+    flex-shrink: 0;
+    box-shadow: 0 0 8px var(--gold);
 }
 
-.objectifs li:last-child{ border-bottom:none; }
-
-.objectifs .marque{
-    width:6px;
-    height:6px;
-    border-radius:50%;
-    background: var(--brass);
-    margin-top:8px;
-    flex-shrink:0;
+.action{
+    margin-top: 64px;
+    display: flex;
+    justify-content: center;
 }
 
-.action{ margin-top:64px; display:flex; justify-content:center; }
-
+/* Bouton à impulsion lumineuse */
 button{
-    font-family:'Inter', sans-serif;
-    font-size:13px;
-    letter-spacing:.12em;
-    text-transform:uppercase;
-    color: var(--ink);
-    background: var(--paper);
-    border:none;
-    padding:16px 40px;
-    cursor:pointer;
-    transition: background .25s, transform .15s;
+    font-family: 'Inter', sans-serif;
+    padding: 18px 54px;
+    border: 1px solid var(--gold);
+    background: transparent;
+    color: var(--gold);
+    font-size: 12px;
+    letter-spacing: 4px;
+    font-weight: 500;
+    text-transform: uppercase;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: color 0.3s, transform 0.2s, border-color 0.3s;
 }
 
-button:hover{ background: var(--brass); }
-button:active{ transform: scale(.98); }
+button::before{
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: -1;
+}
+
+button:hover{ color: var(--ink); border-color: var(--gold-bright); }
+button:hover::before{ transform: scaleX(1); transform-origin: left; }
+button:active{ transform: scale(0.97); }
 
 button:focus-visible{
-    outline:2px solid var(--brass);
-    outline-offset:4px;
+    outline: 2px solid var(--gold);
+    outline-offset: 4px;
 }
 
 footer{
-    margin-top:64px;
-    text-align:center;
-    font-size:12px;
-    letter-spacing:.08em;
+    margin-top: 96px;
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 3px;
     color: var(--paper-dim);
-    text-transform:uppercase;
 }
 
 .fade-in{
-    opacity:0;
-    transform: translateY(8px);
-    animation: lever .6s ease forwards;
+    opacity: 0;
+    transform: translateY(25px);
+    animation: raise 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
-
-@keyframes lever{ to{ opacity:1; transform:none; } }
+@keyframes raise{ to{ opacity: 1; transform: translateY(0); } }
 
 @media (prefers-reduced-motion: reduce){
     *{ animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
 
-@media (max-width: 520px){
-    .wrap{ padding: 48px 20px 60px; }
-    .cadran-zone{ margin-top:0; justify-content:flex-start; }
-    .agenda li, .objectifs li{ font-size:14px; }
+@media (max-width: 600px){
+    .wrap{ padding: 56px 16px; }
+    .meta-bar{ flex-direction: column; align-items: flex-start; gap: 14px; padding: 20px; }
 }
 </style>
 </head>
 <body>
 
+<canvas id="c" aria-hidden="true"></canvas>
+
 <div class="wrap">
-
-    <div class="cadran-zone fade-in" style="animation-delay:.05s">
-        <div class="cadran" id="cadran" role="img" aria-label="Cadran décoratif, glisser pour faire tourner l'aiguille" tabindex="0"></div>
-    </div>
-
-    <header class="fade-in" style="animation-delay:.1s">
+    <header class="fade-in">
         <p class="eyebrow">Calendrier personnel</p>
         <h1>Programme des vacances</h1>
-        <p class="sous-titre">Répartition des temps d'écran, des activités et des objectifs pour la période.</p>
+        <p class="sous-titre">Répartition des temps d'écran, des activités d'apprentissage et de développement physique.</p>
+
+        <div class="meta-bar">
+            <div class="meta-group">
+                <span class="label">Aujourd'hui</span>
+                <span class="value" id="date">—</span>
+            </div>
+            <div class="meta-group">
+                <span class="label">Heure locale</span>
+                <span class="value" id="clock">00:00:00</span>
+            </div>
+        </div>
     </header>
 
-    <section class="fade-in" style="animation-delay:.15s">
-        <div class="section-tete">
-            <span class="section-num">01</span>
+    <div class="planning-grid">
+        <section class="card fade-in" style="animation-delay: 0.1s">
             <h2>Jeux et tablettes</h2>
-        </div>
-        <ul class="agenda">
-            <li><span class="jour">Mercredi</span><span class="horaire">12 h 00 – 18 h 00</span></li>
-            <li><span class="jour">Vendredi</span><span class="horaire">11 h 00 – 15 h 00</span></li>
-            <li><span class="jour">Samedi &amp; dimanche</span><span class="horaire">11 h 00 – 17 h 00</span></li>
-        </ul>
-    </section>
+            <ul class="agenda-list">
+                <li><span>Mercredi</span><span class="time">12 h 00 – 18 h 00</span></li>
+                <li><span>Vendredi</span><span class="time">11 h 00 – 15 h 00</span></li>
+                <li><span>Samedi &amp; dimanche</span><span class="time">11 h 00 – 17 h 00</span></li>
+            </ul>
+        </section>
 
-    <section class="fade-in" style="animation-delay:.2s">
-        <div class="section-tete">
-            <span class="section-num">02</span>
-            <h2>Activités éducatives</h2>
-        </div>
-        <ul class="agenda">
-            <li><span class="jour">Lundi</span><span class="horaire">Lecture · Sport · Méditation</span></li>
-            <li><span class="jour">Mardi</span><span class="horaire">Lecture · Sport · Méditation</span></li>
-            <li><span class="jour">Jeudi</span><span class="horaire">Lecture · Sport · Méditation</span></li>
-        </ul>
-    </section>
+        <section class="card fade-in" style="animation-delay: 0.18s">
+            <h2>Activités quotidiennes</h2>
+            <ul class="agenda-list">
+                <li><span>Lecture</span><span class="time">Tous les jours</span></li>
+                <li><span>Sport</span><span class="time">45 min</span></li>
+                <li><span>Méditation</span><span class="time">20 min</span></li>
+            </ul>
+        </section>
 
-    <section class="fade-in" style="animation-delay:.25s">
-        <div class="section-tete">
-            <span class="section-num">03</span>
-            <h2>Objectifs</h2>
-        </div>
-        <ul class="objectifs">
-            <li><span class="marque"></span><span>Développer la lecture</span></li>
-            <li><span class="marque"></span><span>Faire du sport régulièrement</span></li>
-            <li><span class="marque"></span><span>Réduire le temps d'écran</span></li>
-        </ul>
-    </section>
-
-    <div class="action fade-in" style="animation-delay:.3s">
-        <button id="startBtn" type="button">Commencer</button>
+        <section class="card fade-in" style="animation-delay: 0.26s">
+            <h2>Objectifs fondamentaux</h2>
+            <ul class="objectifs-list">
+                <li><span class="dot"></span><span>Développer la lecture personnelle</span></li>
+                <li><span class="dot"></span><span>Maintenir une régularité physique</span></li>
+                <li><span class="dot"></span><span>Réduire le temps d'écran</span></li>
+            </ul>
+        </section>
     </div>
 
-    <footer class="fade-in" style="animation-delay:.35s">
+    <div class="action fade-in" style="animation-delay: 0.34s">
+        <button id="startBtn" type="button">Initialiser la session</button>
+    </div>
+
+    <footer class="fade-in" style="animation-delay: 0.4s">
         GRÂCE_LE_KG_ZFR · 2026
     </footer>
-
 </div>
 
 <script>
 (function(){
     "use strict";
 
-    const cadran = document.getElementById('cadran');
-    let drag = false;
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    function getAngle(e) {
-        const rect = cadran.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        
-        const pageX = e.touches && e.touches.length ? e.touches[0].clientX : e.clientX;
-        const pageY = e.touches && e.touches.length ? e.touches[0].clientY : e.clientY;
-
-        const deltaX = pageX - centerX;
-        const deltaY = pageY - centerY;
-
-        return Math.atan2(deltaY, deltaX) * (180 / Math.PI) + 90;
+    // Date et heure synchronisées
+    var clock = document.getElementById('clock');
+    var dateEl = document.getElementById('date');
+    function tick(){
+        var now = new Date();
+        clock.textContent = now.toLocaleTimeString('fr-FR');
+        dateEl.textContent = now.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
     }
+    tick();
+    setInterval(tick, 1000);
 
-    function start(e) {
-        drag = true;
-        updateAngle(e);
-    }
-
-    function move(e) {
-        if (!drag) return;
-        updateAngle(e);
-    }
-
-    function stop() { 
-        drag = false; 
-    }
-
-    function updateAngle(e) {
-        const angle = getAngle(e);
-        cadran.style.setProperty('--angle', `${angle}deg`);
-    }
-
-    // Souris
-    cadran.addEventListener('mousedown', start);
-    window.addEventListener('mousemove', move);
-    window.addEventListener('mouseup', stop);
-
-    // Tactile (avec blocage du scroll de la page pendant qu'on tourne l'aiguille)
-    cadran.addEventListener('touchstart', (e) => { drag = true; updateAngle(e); e.preventDefault(); }, { passive: false });
-    window.addEventListener('touchmove', (e) => { if(drag) { updateAngle(e); e.preventDefault(); } }, { passive: false });
-    window.addEventListener('touchend', stop);
-
-    // Clavier
-    let keyboardAngle = 0;
-    cadran.addEventListener('keydown', function(e) {
-        if (e.key === 'ArrowLeft')  { keyboardAngle -= 15; }
-        if (e.key === 'ArrowRight') { keyboardAngle += 15; }
-        cadran.style.setProperty('--angle', `${keyboardAngle}deg`);
+    document.getElementById('startBtn').addEventListener('click', function(){
+        alert('Session initialisée. Bonnes vacances ! 🚀');
     });
 
-    document.getElementById('startBtn').addEventListener('click', function() {
-        alert('Bonnes vacances.');
+    // Moteur de Constellation Interactive (Arrière-plan Canvas)
+    var c = document.getElementById('c');
+    var ctx = c.getContext('2d');
+    var pointer = { x: -9999, y: -9999 };
+    var running = !reduceMotion && !document.hidden;
+    var rafId = null;
+
+    function resize(){
+        c.width = window.innerWidth;
+        c.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    var particleCount = window.innerWidth < 600 ? 45 : 100;
+    var particles = [];
+    for (var i = 0; i < particleCount; i++){
+        particles.push({
+            x: Math.random() * window.innerWidth,
+            y: Math.random() * window.innerHeight,
+            r: Math.random() * 1.5 + 0.5,
+            vx: (Math.random() - 0.5) * 0.35,
+            vy: (Math.random() - 0.5) * 0.35
+        });
+    }
+
+    function trackPointer(e){
+        pointer.x = e.touches ? e.touches[0].clientX : e.clientX;
+        pointer.y = e.touches ? e.touches[0].clientY : e.clientY;
+    }
+    window.addEventListener('mousemove', trackPointer, { passive: true });
+    window.addEventListener('touchstart', trackPointer, { passive: true });
+    window.addEventListener('touchmove', trackPointer, { passive: true });
+    window.addEventListener('touchend', function(){ pointer.x = -9999; pointer.y = -9999; });
+
+    function animate(){
+        if (!running) return;
+        ctx.clearRect(0, 0, c.width, c.height);
+
+        // Rendu et logique des connexions cinétiques
+        particles.forEach(function(p, idx){
+            p.x += p.vx;
+            p.y += p.vy;
+
+            if (p.x < 0) p.x = c.width;
+            if (p.x > c.width) p.x = 0;
+            if (p.y < 0) p.y = c.height;
+            if (p.y > c.height) p.y = 0;
+
+            // Magnétisme de proximité avec le pointeur
+            if (pointer.x !== -9999){
+                var dxPointer = pointer.x - p.x;
+                var dyPointer = pointer.y - p.y;
+                var distPointer = Math.sqrt(dxPointer * dxPointer + dyPointer * dyPointer);
+                if (distPointer < 140 && distPointer > 0){
+                    var force = (140 - distPointer) / 140;
+                    p.x += (dxPointer / distPointer) * force * 1.8;
+                    p.y += (dyPointer / distPointer) * force * 1.8;
+                }
+            }
+
+            // Dessin des lignes de liaison (Constellation)
+            for (var j = idx + 1; j < particles.length; j++) {
+                var p2 = particles[j];
+                var dx = p.x - p2.x;
+                var dy = p.y - p2.y;
+                var dist = Math.sqrt(dx * dx + dy * dy);
+
+                // Ne dessine des liens que si les particules sont proches
+                if (dist < 90) {
+                    var alpha = (90 - dist) / 90 * 0.13;
+                    ctx.strokeStyle = 'rgba(184, 146, 63, ' + alpha + ')';
+                    ctx.lineWidth = 0.6;
+                    ctx.beginPath();
+                    ctx.moveTo(p.x, p.y);
+                    ctx.lineTo(p2.x, p2.y);
+                    ctx.stroke();
+                }
+            }
+
+            // Dessin individuel de la particule d'or
+            ctx.fillStyle = 'rgba(184, 146, 63, 0.55)';
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fill();
+        });
+
+        rafId = requestAnimationFrame(animate);
+    }
+
+    if (reduceMotion){
+        ctx.clearRect(0, 0, c.width, c.height);
+        ctx.fillStyle = 'rgba(184, 146, 63, 0.4)';
+        particles.forEach(function(p){
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fill();
+        });
+    } else {
+        animate();
+    }
+
+    document.addEventListener('visibilitychange', function(){
+        if (reduceMotion) return;
+        if (document.hidden){
+            running = false;
+            if (rafId) cancelAnimationFrame(rafId);
+        } else {
+            running = true;
+            animate();
+        }
     });
 })();
 </script>
 </body>
 </html>
+
