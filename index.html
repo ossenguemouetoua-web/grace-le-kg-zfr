@@ -3,156 +3,206 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Programme des Vacances</title>
+<title>Programme des Vacances - Aqua 3D</title>
 <style>
+/* FOND ET RÉSOUDRE LE SCROLL */
 body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    background: radial-gradient(circle at 50% 50%, #1a365d 0%, #0f172a 100%);
     color: white;
     min-height: 100vh;
     overflow-x: hidden;
     position: relative;
+    perspective: 1000px; /* Permet les effets 3D CSS */
 }
 
 .container {
-    max-width: 900px;
+    max-width: 800px;
     margin: auto;
-    padding: 30px;
+    padding: 20px;
+    position: relative;
+    z-index: 2;
 }
 
 h1 {
     text-align: center;
-    font-size: 40px;
-    text-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    font-size: 32px;
+    letter-spacing: 2px;
+    text-shadow: 0 0 20px rgba(0, 198, 255, 0.6);
 }
 
+/* 🔹 PANNEAUX EN 3D CSS ET GLASSMORPHISM */
 .section {
-    background: rgba(255, 255, 255, 0.15);
-    padding: 20px;
-    margin-top: 25px;
-    border-radius: 20px;
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 25px;
+    margin-top: 30px;
+    /* Border-radius élevé */
+    border-radius: 30px; 
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), 
+                inset 0 4px 10px rgba(255, 255, 255, 0.1);
+    /* Effet de relief 3D au survol/toucher */
+    transform: style 3d;
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.section:hover {
+    transform: translateY(-5px) rotateX(4deg) rotateY(-2deg);
 }
 
 h2 {
-    color: #FFD700;
-}
-
-ul {
-    list-style: none;
-    padding: 0;
-}
-
-li {
-    padding: 12px;
-    margin: 8px 0;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 15px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.objectif {
+    color: #00c6ff;
+    font-size: 22px;
     display: flex;
     align-items: center;
     gap: 10px;
-    background: rgba(255, 255, 255, 0.05);
-    padding: 10px;
-    border-radius: 12px;
 }
 
-.footer {
-    text-align: center;
-    margin-top: 40px;
-    opacity: 0.8;
+/* 🔹 LIQUID UI (Effet eau enfermée dans les listes) */
+li, .objectif {
+    padding: 14px;
+    margin: 10px 0;
+    background: rgba(0, 198, 255, 0.1);
+    /* Border-radius élevé pour style liquide */
+    border-radius: 20px; 
+    border: 1px solid rgba(0, 198, 255, 0.2);
+    position: relative;
+    overflow: hidden;
 }
 
-/* Bouton style Apple / Bulle de verre */
+/* Vague d'eau en arrière-plan animée fluide */
+li::before, .objectif::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: rgba(0, 198, 255, 0.15);
+    border-radius: 40%;
+    animation: wave 6s infinite linear;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes wave {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+span { position: relative; z-index: 1; }
+
+/* 🔹 BOUTON LIQUIDE ET VERRE 3D */
 button {
-    background: rgba(255, 255, 255, 0.25);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 2px solid rgba(0, 198, 255, 0.4);
+    border-radius: 40px;
     color: white;
-    padding: 15px 40px;
+    padding: 16px 45px;
     cursor: pointer;
     font-size: 18px;
     font-weight: bold;
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2), 
-                inset 0 4px 4px rgba(255, 255, 255, 0.3);
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 198, 255, 0.3), 
+                inset 0 4px 4px rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
 }
 
 button:hover {
-    transform: scale(1.05);
-    background: rgba(255, 255, 255, 0.4);
-    box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.3);
+    transform: scale(1.05) translateY(-3px);
+    box-shadow: 0 15px 30px rgba(0, 198, 255, 0.5);
 }
 
-/* Animation des bulles d'eau au clic */
+/* 🔹 INTERFACE SOLEIL 3D INTERACTIF */
+.canvas-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+/* Sphère 3D pure CSS que l'on peut faire tourner */
+.soleil-3d {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #ffdf00, #ff5e00);
+    box-shadow: 0 0 40px #ff9f00, inset -20px -20px 40px rgba(0,0,0,0.4);
+    cursor: grab;
+    transition: transform 0.1s linear;
+}
+
+.soleil-3d:active { cursor: grabbing; }
+
+/* Animation des bulles d'eau qui éclatent */
 .bulle-eau {
     position: absolute;
-    background: radial-gradient(circle, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0) 70%);
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: radial-gradient(circle, rgba(0,198,255,0.6) 0%, rgba(255,255,255,0) 70%);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 50%;
     pointer-events: none;
     transform: translate(-50%, -50%);
-    animation: eclatement 0.6s ease-out forwards;
+    animation: eclatement 0.6s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+    z-index: 9999;
 }
 
 @keyframes eclatement {
-    0% { width: 0px; height: 0px; opacity: 0.8; }
-    100% { width: 180px; height: 180px; opacity: 0; }
+    0% { width: 0px; height: 0px; opacity: 1; }
+    100% { width: 150px; height: 150px; opacity: 0; }
 }
+
+.footer { text-align: center; margin-top: 40px; opacity: 0.6; font-size: 14px; }
 </style>
 </head>
 <body>
 
 <div class="container">
+    
+    <!-- Zone du soleil interactif 3D -->
+    <div class="canvas-container">
+        <div class="soleil-3d" id="soleil"></div>
+    </div>
+
     <h1>🌞 PROGRAMME DES VACANCES 🌞</h1>
 
     <div class="section">
-        <h2>📱 Jeux et Tablettes</h2>
+        <h2>📱<span>Jeux et Tablettes</span></h2>
         <ul>
-            <li>Mercredi : 12h00 – 18h00</li>
-            <li>Vendredi : 11h00 – 15h00</li>
-            <li>Samedi et Dimanche : 11h00 – 17h00</li>
+            <li><span>Mercredi : 12h00 – 18h00</span></li>
+            <li><span>Vendredi : 11h00 – 15h00</span></li>
+            <li><span>Samedi et Dimanche : 11h00 – 17h00</span></li>
         </ul>
     </div>
 
     <div class="section">
-        <h2>📚 Activités éducatives</h2>
+        <h2>📚<span>Activités éducatives</span></h2>
         <ul>
-            <li>Lundi : Lecture – Sport – Méditation</li>
-            <li>Mardi : Lecture – Sport – Méditation</li>
-            <li>Jeudi : Lecture – Sport – Méditation</li>
+            <li><span>Lundi : Lecture – Sport – Méditation</span></li>
+            <li><span>Mardi : Lecture – Sport – Méditation</span></li>
+            <li><span>Jeudi : Lecture – Sport – Méditation</span></li>
         </ul>
     </div>
 
     <div class="section">
-        <h2>📜 Règlement</h2>
-        <p>
-            Les jeux vidéo et les tablettes sont autorisés uniquement aux horaires indiqués.
-            En dehors de ces périodes, les appareils doivent être rangés.
-            Le respect de ce programme permet de développer de bonnes habitudes et d'équilibrer loisirs, apprentissage et détente.
-        </p>
+        <h2>📜<span>Règlement</span></h2>
+        <p><span>Les jeux vidéo et les tablettes sont autorisés uniquement aux horaires indiqués. En dehors de ces périodes, les appareils doivent être rangés.</span></p>
     </div>
 
     <div class="section">
-        <h2>🎯 Objectifs</h2>
-        <p class="objectif">✔ Développer le goût de la lecture</p>
-        <p class="objectif">✔ Pratiquer une activité physique</p>
-        <p class="objectif">✔ Mieux gérer le temps d'écran</p>
-        <p class="objectif">✔ Favoriser la concentration</p>
-        <p class="objectif">✔ Profiter pleinement des vacances</p>
+        <h2>🎯<span>Objectifs</span></h2>
+        <div class="objectif"><span>✔ Développer le goût de la lecture</span></div>
+        <div class="objectif"><span>✔ Pratiquer une activité physique</span></div>
+        <div class="objectif"><span>✔ Mieux gérer le temps d'écran</span></div>
     </div>
 
     <br><center>
-        <button onclick="alert('Bonnes vacances ! 🌞📚⚽')">
+        <button onclick="alert('Bonnes vacances technologiques ! 🌊🚀')">
             Commencer les vacances
         </button>
     </center>
@@ -162,6 +212,64 @@ button:hover {
     </div>
 </div>
 
-<script src="script.js"></script>
+<script>
+// EFFET BULLES D'EAU FLUIDES AU CLIC
+document.addEventListener('click', function(e) {
+    if(e.target.id === 'soleil') return; // Évite les conflits avec le soleil
+    const b = document.createElement('div');
+    b.classList.add('bulle-eau');
+    b.style.left = e.clientX + window.scrollX + 'px';
+    b.style.top = e.clientY + window.scrollY + 'px';
+    document.body.appendChild(b);
+    setTimeout(() => { b.remove(); }, 600);
+});
+
+// FAIT TOURNER LE SOLEIL EN 3D AU TOUCHER / SOURIS
+const soleil = document.getElementById('soleil');
+let isDragging = false;
+let previousX = 0;
+let previousY = 0;
+let rotationX = 0;
+let rotationY = 0;
+
+function startDrag(e) {
+    isDragging = true;
+    const pageX = e.pageX || e.touches[0].pageX;
+    const pageY = e.pageY || e.touches[0].pageY;
+    previousX = pageX;
+    previousY = pageY;
+}
+
+function moveDrag(e) {
+    if (!isDragging) return;
+    const pageX = e.pageX || e.touches[0].pageX;
+    const pageY = e.pageY || e.touches[0].pageY;
+    let deltaX = pageX - previousX;
+    let deltaY = pageY - previousY;
+    
+    rotationY += deltaX * 0.5;
+    rotationX -= deltaY * 0.5;
+    
+    // Application de la rotation 3D
+    soleil.style.transform = `rotateX(${rotationX}deg) rotateY(${rotationY}deg) scale(1.1)`;
+    
+    previousX = pageX;
+    previousY = pageY;
+}
+
+function stopDrag() {
+    isDragging = false;
+    soleil.style.transform = `rotateX(${rotationX}deg) rotateY(${rotationY}deg) scale(1)`;
+}
+
+// Événements Tactiles (Mobile) et Souris (PC)
+soleil.addEventListener('mousedown', startDrag);
+window.addEventListener('mousemove', moveDrag);
+window.addEventListener('mouseup', stopDrag);
+
+soleil.addEventListener('touchstart', startDrag);
+window.addEventListener('touchmove', moveDrag);
+window.addEventListener('touchend', stopDrag);
+</script>
 </body>
 </html>
