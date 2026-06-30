@@ -1,0 +1,6 @@
+body { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; font-family: -apple-system, sans-serif; min-height: 100vh; margin: 0; overflow-x: hidden; position: relative; }
+button, .bouton-apple { background: rgba(255, 255, 255, 0.25); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.4); border-radius: 25px; padding: 14px 28px; color: white; font-size: 16px; font-weight: 600; cursor: pointer; box-shadow: 0 8px 32px 0 rgba(31,38,135,0.2), inset 0 4px 4px rgba(255,255,255,0.3); transition: all 0.3s ease; }
+button:hover { transform: scale(1.05); background: rgba(255, 255, 255, 0.4); }
+input[type="text"], textarea { background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.25); border-radius: 15px; padding: 12px; color: white; outline: none; }
+.bulle-eau { position: absolute; background: radial-gradient(circle, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0) 70%); border: 1px solid rgba(255,255,255,0.4); border-radius: 50%; pointer-events: none; transform: translate(-50%, -50%); animation: eclatement 0.6s ease-out forwards; }
+@keyframes eclatement { 0% { width: 0px; height: 0px; opacity: 0.8; } 100% { width: 180px; height: 180px; opacity: 0; } }
