@@ -3,852 +3,375 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>GRÂCE_LE_KG_ZFR • Aqua 3D</title>
-
+<meta name="description" content="Programme des vacances">
+<meta name="theme-color" content="#11141A">
+<title>Programme des vacances</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
+:root{
+    --ink: #0E1116;
+    --paper: #EDE8DD;
+    --paper-dim: #B9B3A4;
+    --brass: #B8923F;
+    --brass-soft: rgba(184,146,63,.35);
+    --line: rgba(237,232,221,.14);
 }
+
+*{ margin:0; padding:0; box-sizing:border-box; }
+
+html{ scroll-behavior:smooth; }
 
 body{
-
-font-family:
--apple-system,
-BlinkMacSystemFont,
-Segoe UI,
-sans-serif;
-
-background:
-
-radial-gradient(circle at center,
-#1d4e89 0%,
-#09111f 100%);
-
-min-height:100vh;
-
-overflow-x:hidden;
-
-color:white;
-
-perspective:1500px;
-
-transform-style:
-preserve-3d;
-
+    font-family:'Inter', sans-serif;
+    background: var(--ink);
+    color: var(--paper);
+    min-height:100vh;
+    overflow-x:hidden;
+    line-height:1.5;
 }
-
-/* particules */
 
 body::before{
-
-content:"";
-
-position:fixed;
-
-inset:0;
-
-background:
-
-radial-gradient(
-rgba(255,255,255,.18) 2px,
-transparent 2px);
-
-background-size:
-80px 80px;
-
-opacity:.15;
-
-animation:
-stars 35s linear infinite;
-
-pointer-events:none;
-
+    content:"";
+    position:fixed;
+    inset:0;
+    background-image:
+        linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 64px 64px;
+    opacity:.25;
+    pointer-events:none;
 }
 
-@keyframes stars{
-
-from{
-
-transform:
-translateY(0);
-
+.wrap{
+    max-width:760px;
+    margin:auto;
+    padding: 64px 28px 80px;
+    position:relative;
 }
 
-to{
+header{ margin-bottom:56px; }
 
-transform:
-translateY(-250px);
-
+.eyebrow{
+    font-size:12px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color: var(--brass);
+    margin-bottom:18px;
+    display:flex;
+    align-items:center;
+    gap:12px;
 }
 
-}
-
-.container{
-
-max-width:900px;
-
-margin:auto;
-
-padding:30px;
-
-position:relative;
-
-z-index:10;
-
-}
-
-.canvas-container{
-
-display:flex;
-
-justify-content:center;
-
-margin-bottom:25px;
-
-}
-
-/* SOLEIL */
-
-.soleil-3d{
-
-width:150px;
-
-height:150px;
-
-border-radius:50%;
-
-background:
-
-radial-gradient(
-
-circle at 30% 30%,
-
-#fff7b0 0%,
-
-#ffd500 20%,
-
-#ff9600 60%,
-
-#ff4d00 100%
-
-);
-
-box-shadow:
-
-0 0 40px orange,
-
-0 0 80px #ff9600,
-
-0 0 120px #ff6a00,
-
-inset -15px -15px 30px rgba(0,0,0,.35);
-
-cursor:grab;
-
-transform-style:
-preserve-3d;
-
-transition:
-transform .15s;
-
-animation:
-pulse 4s infinite alternate;
-
-}
-
-@keyframes pulse{
-
-from{
-
-transform:
-scale(1);
-
-}
-
-to{
-
-transform:
-scale(1.05);
-
-}
-
+.eyebrow::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background: var(--line);
 }
 
 h1{
-
-text-align:center;
-
-font-size:34px;
-
-letter-spacing:2px;
-
-margin-bottom:30px;
-
-text-shadow:
-
-0 0 25px cyan;
-
+    font-family:'Newsreader', serif;
+    font-weight:500;
+    font-size: clamp(34px, 7vw, 52px);
+    letter-spacing:-0.01em;
+    color: var(--paper);
+    margin-bottom:10px;
 }
 
-/* PANNEAUX */
-
-.section{
-
-position:relative;
-
-overflow:hidden;
-
-padding:25px;
-
-margin-bottom:25px;
-
-border-radius:35px;
-
-background:
-
-linear-gradient(
-
-135deg,
-
-rgba(255,255,255,.14),
-
-rgba(255,255,255,.04)
-
-);
-
-backdrop-filter:
-blur(20px);
-
--webkit-backdrop-filter:
-blur(20px);
-
-border:
-
-1px solid rgba(255,255,255,.2);
-
-box-shadow:
-
-0 20px 45px rgba(0,0,0,.35),
-
-inset 0 2px 8px rgba(255,255,255,.2);
-
-transform-style:
-preserve-3d;
-
-transition:
-0.4s;
-
+.sous-titre{
+    font-size:15px;
+    color: var(--paper-dim);
+    max-width:46ch;
 }
 
-.section:hover{
-
-transform:
-
-translateY(-6px)
-
-rotateX(4deg)
-
-rotateY(-2deg);
-
+.cadran-zone{
+    display:flex;
+    justify-content:flex-end;
+    margin-top:-92px;
+    margin-bottom:8px;
 }
 
-.section::before{
-
-content:"";
-
-position:absolute;
-
-width:200%;
-
-height:200%;
-
-top:-50%;
-
-left:-50%;
-
-background:
-
-radial-gradient(
-
-circle,
-
-rgba(255,255,255,.18),
-
-transparent 60%
-
-);
-
-animation:
-liquid 12s linear infinite;
-
+.cadran{
+    width:84px;
+    height:84px;
+    border-radius:50%;
+    border:1px solid var(--brass-soft);
+    position:relative;
+    cursor:grab;
+    touch-action:none;
+    background: radial-gradient(circle at 50% 50%, transparent 60%, rgba(184,146,63,.08) 100%);
 }
 
-@keyframes liquid{
+.cadran:active{ cursor:grabbing; }
 
-from{
-
-transform:
-rotate(0deg);
-
+.cadran::before{
+    content:"";
+    position:absolute;
+    top:50%; left:50%;
+    width:1px;
+    height:34px;
+    background: var(--brass);
+    transform-origin: top center;
+    /* Utilise la variable CSS pour une rotation fluide en 60 FPS */
+    transform: translate(-50%, 0) rotate(var(--angle, 0deg));
 }
 
-to{
-
-transform:
-rotate(360deg);
-
+.cadran::after{
+    content:"";
+    position:absolute;
+    top:50%; left:50%;
+    width:5px;
+    height:5px;
+    border-radius:50%;
+    background: var(--brass);
+    transform: translate(-50%, -50%);
 }
 
+section{ margin-bottom:48px; }
+
+.section-tete{
+    display:flex;
+    align-items:baseline;
+    gap:14px;
+    margin-bottom:20px;
+    padding-bottom:10px;
+    border-bottom:1px solid var(--line);
+}
+
+.section-num{
+    font-family:'Newsreader', serif;
+    font-style:italic;
+    color: var(--brass);
+    font-size:15px;
 }
 
 h2{
-
-position:relative;
-
-z-index:2;
-
-font-size:22px;
-
-color:#5bdcff;
-
-margin-bottom:15px;
-
+    font-family:'Newsreader', serif;
+    font-weight:500;
+    font-size:21px;
+    letter-spacing:.01em;
 }
 
-ul{
+.agenda{ list-style:none; }
 
-list-style:none;
-
+.agenda li{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:16px;
+    padding:14px 2px;
+    border-bottom:1px dashed var(--line);
+    font-size:15px;
 }
 
-li{
+.agenda li:last-child{ border-bottom:none; }
 
-position:relative;
+.jour{ color: var(--paper); font-weight:500; flex-shrink:0; }
 
-padding:16px;
-
-margin:12px 0;
-
-border-radius:22px;
-
-overflow:hidden;
-
-background:
-
-rgba(0,198,255,.08);
-
-border:
-
-1px solid rgba(0,198,255,.2);
-
+.horaire{
+    color: var(--paper-dim);
+    font-variant-numeric: tabular-nums;
+    text-align:right;
 }
 
-li::before{
+.objectifs{ list-style:none; display:flex; flex-direction:column; }
 
-content:"";
-
-position:absolute;
-
-top:50%;
-
-left:-50%;
-
-width:200%;
-
-height:200%;
-
-border-radius:40%;
-
-background:
-
-rgba(0,198,255,.12);
-
-animation:
-wave 7s linear infinite;
-
+.objectifs li{
+    display:flex;
+    align-items:flex-start;
+    gap:14px;
+    padding:14px 0;
+    border-bottom:1px dashed var(--line);
+    font-size:15px;
+    color: var(--paper);
 }
 
-@keyframes wave{
+.objectifs li:last-child{ border-bottom:none; }
 
-from{
-
-transform:
-rotate(0deg);
-
+.objectifs .marque{
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background: var(--brass);
+    margin-top:8px;
+    flex-shrink:0;
 }
 
-to{
-
-transform:
-rotate(360deg);
-
-}
-
-}
-
-span{
-
-position:relative;
-
-z-index:5;
-
-}
-
-.objectif{
-
-position:relative;
-
-padding:16px;
-
-margin:12px 0;
-
-border-radius:22px;
-
-background:
-
-rgba(0,198,255,.08);
-
-border:
-
-1px solid rgba(0,198,255,.2);
-
-overflow:hidden;
-
-}
+.action{ margin-top:64px; display:flex; justify-content:center; }
 
 button{
-
-padding:
-
-18px 45px;
-
-border:none;
-
-border-radius:50px;
-
-background:
-
-rgba(255,255,255,.12);
-
-backdrop-filter:
-blur(15px);
-
-color:white;
-
-font-size:18px;
-
-font-weight:bold;
-
-cursor:pointer;
-
-box-shadow:
-
-0 8px 25px rgba(0,198,255,.4),
-
-inset 0 2px 5px rgba(255,255,255,.4),
-
-inset 0 -3px 8px rgba(0,0,0,.2);
-
-transition:
-.3s;
-
+    font-family:'Inter', sans-serif;
+    font-size:13px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color: var(--ink);
+    background: var(--paper);
+    border:none;
+    padding:16px 40px;
+    cursor:pointer;
+    transition: background .25s, transform .15s;
 }
 
-button:hover{
+button:hover{ background: var(--brass); }
+button:active{ transform: scale(.98); }
 
-transform:
-
-translateY(-4px)
-
-scale(1.05);
-
+button:focus-visible{
+    outline:2px solid var(--brass);
+    outline-offset:4px;
 }
 
-.footer{
-
-text-align:center;
-
-margin-top:40px;
-
-opacity:.6;
-
-font-size:14px;
-
+footer{
+    margin-top:64px;
+    text-align:center;
+    font-size:12px;
+    letter-spacing:.08em;
+    color: var(--paper-dim);
+    text-transform:uppercase;
 }
 
-/* bulles */
-
-.bulle-eau{
-
-position:absolute;
-
-border-radius:50%;
-
-pointer-events:none;
-
-background:
-
-radial-gradient(
-
-circle,
-
-rgba(0,198,255,.7),
-
-transparent
-
-);
-
-animation:
-explode .7s forwards;
-
-z-index:9999;
-
+.fade-in{
+    opacity:0;
+    transform: translateY(8px);
+    animation: lever .6s ease forwards;
 }
 
-@keyframes explode{
+@keyframes lever{ to{ opacity:1; transform:none; } }
 
-0%{
-
-width:0;
-
-height:0;
-
-opacity:1;
-
+@media (prefers-reduced-motion: reduce){
+    *{ animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
 
-100%{
-
-width:160px;
-
-height:160px;
-
-opacity:0;
-
+@media (max-width: 520px){
+    .wrap{ padding: 48px 20px 60px; }
+    .cadran-zone{ margin-top:0; justify-content:flex-start; }
+    .agenda li, .objectifs li{ font-size:14px; }
 }
-
-}
-
 </style>
-
 </head>
-
 <body>
 
-<div class="container">
-
-<div class="canvas-container">
-
-<div
-class="soleil-3d"
-id="soleil"></div>
-
-</div>
-
-<h1>
-
-🌞 PROGRAMME DES VACANCES 🌞
-
-</h1>
-
-<div class="section">
-
-<h2>
-
-📱 Jeux et Tablettes
-
-</h2>
-
-<ul>
-
-<li>
-
-<span>
-
-Mercredi : 12h00 – 18h00
-
-</span>
-
-</li>
-
-<li>
-
-<span>
-
-Vendredi : 11h00 – 15h00
-
-</span>
-
-</li>
-
-<li>
-
-<span>
-
-Samedi et Dimanche :
-11h00 – 17h00
-
-</span>
-
-</li>
-
-</ul>
-
-</div>
-
-<div class="section">
-
-<h2>
-
-📚 Activités éducatives
-
-</h2>
-
-<ul>
-
-<li>
-
-<span>
-
-Lundi :
-Lecture – Sport – Méditation
-
-</span>
-
-</li>
-
-<li>
-
-<span>
-
-Mardi :
-Lecture – Sport – Méditation
-
-</span>
-
-</li>
-
-<li>
-
-<span>
-
-Jeudi :
-Lecture – Sport – Méditation
-
-</span>
-
-</li>
-
-</ul>
-
-</div>
-
-<div class="section">
-
-<h2>
-
-🎯 Objectifs
-
-</h2>
-
-<div class="objectif">
-
-✔ Développer la lecture
-
-</div>
-
-<div class="objectif">
-
-✔ Faire du sport
-
-</div>
-
-<div class="objectif">
-
-✔ Réduire le temps d'écran
-
-</div>
-
-</div>
-
-<center>
-
-<button onclick="alert('Bonnes vacances 🚀🌊')">
-
-Commencer
-
-</button>
-
-</center>
-
-<div class="footer">
-
-GRÂCE_LE_KG_ZFR © 2026
-
-</div>
+<div class="wrap">
+
+    <div class="cadran-zone fade-in" style="animation-delay:.05s">
+        <div class="cadran" id="cadran" role="img" aria-label="Cadran décoratif, glisser pour faire tourner l'aiguille" tabindex="0"></div>
+    </div>
+
+    <header class="fade-in" style="animation-delay:.1s">
+        <p class="eyebrow">Calendrier personnel</p>
+        <h1>Programme des vacances</h1>
+        <p class="sous-titre">Répartition des temps d'écran, des activités et des objectifs pour la période.</p>
+    </header>
+
+    <section class="fade-in" style="animation-delay:.15s">
+        <div class="section-tete">
+            <span class="section-num">01</span>
+            <h2>Jeux et tablettes</h2>
+        </div>
+        <ul class="agenda">
+            <li><span class="jour">Mercredi</span><span class="horaire">12 h 00 – 18 h 00</span></li>
+            <li><span class="jour">Vendredi</span><span class="horaire">11 h 00 – 15 h 00</span></li>
+            <li><span class="jour">Samedi &amp; dimanche</span><span class="horaire">11 h 00 – 17 h 00</span></li>
+        </ul>
+    </section>
+
+    <section class="fade-in" style="animation-delay:.2s">
+        <div class="section-tete">
+            <span class="section-num">02</span>
+            <h2>Activités éducatives</h2>
+        </div>
+        <ul class="agenda">
+            <li><span class="jour">Lundi</span><span class="horaire">Lecture · Sport · Méditation</span></li>
+            <li><span class="jour">Mardi</span><span class="horaire">Lecture · Sport · Méditation</span></li>
+            <li><span class="jour">Jeudi</span><span class="horaire">Lecture · Sport · Méditation</span></li>
+        </ul>
+    </section>
+
+    <section class="fade-in" style="animation-delay:.25s">
+        <div class="section-tete">
+            <span class="section-num">03</span>
+            <h2>Objectifs</h2>
+        </div>
+        <ul class="objectifs">
+            <li><span class="marque"></span><span>Développer la lecture</span></li>
+            <li><span class="marque"></span><span>Faire du sport régulièrement</span></li>
+            <li><span class="marque"></span><span>Réduire le temps d'écran</span></li>
+        </ul>
+    </section>
+
+    <div class="action fade-in" style="animation-delay:.3s">
+        <button id="startBtn" type="button">Commencer</button>
+    </div>
+
+    <footer class="fade-in" style="animation-delay:.35s">
+        GRÂCE_LE_KG_ZFR · 2026
+    </footer>
 
 </div>
 
 <script>
-
-document.addEventListener(
-
-'click',
-
-e=>{
-
-if(e.target.id==='soleil')
-
-return;
-
-const b=document.createElement('div');
-
-b.className='bulle-eau';
-
-b.style.left=e.pageX+'px';
-
-b.style.top=e.pageY+'px';
-
-document.body.appendChild(b);
-
-setTimeout(
-
-()=>b.remove(),
-
-700
-
-);
-
-}
-
-);
-
-const soleil=
-
-document.getElementById(
-
-'soleil'
-
-);
-
-let drag=false;
-
-let px=0;
-
-let py=0;
-
-let rx=0;
-
-let ry=0;
-
-function start(e){
-
-drag=true;
-
-px=e.pageX||
-
-e.touches[0].pageX;
-
-py=e.pageY||
-
-e.touches[0].pageY;
-
-}
-
-function move(e){
-
-if(!drag)
-
-return;
-
-let x=e.pageX||
-
-e.touches[0].pageX;
-
-let y=e.pageY||
-
-e.touches[0].pageY;
-
-ry+=(x-px)*0.5;
-
-rx-=(y-py)*0.5;
-
-soleil.style.transform=
-
-`rotateX(${rx}deg)
- rotateY(${ry}deg)
- scale(1.05)`;
-
-px=x;
-
-py=y;
-
-}
-
-function stop(){
-
-drag=false;
-
-}
-
-soleil.addEventListener(
-
-'mousedown',
-
-start
-
-);
-
-window.addEventListener(
-
-'mousemove',
-
-move
-
-);
-
-window.addEventListener(
-
-'mouseup',
-
-stop
-
-);
-
-soleil.addEventListener(
-
-'touchstart',
-
-start
-
-);
-
-window.addEventListener(
-
-'touchmove',
-
-move
-
-);
-
-window.addEventListener(
-
-'touchend',
-
-stop
-
-);
-
+(function(){
+    "use strict";
+
+    const cadran = document.getElementById('cadran');
+    let drag = false;
+
+    function getAngle(e) {
+        const rect = cadran.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        
+        const pageX = e.touches && e.touches.length ? e.touches[0].clientX : e.clientX;
+        const pageY = e.touches && e.touches.length ? e.touches[0].clientY : e.clientY;
+
+        const deltaX = pageX - centerX;
+        const deltaY = pageY - centerY;
+
+        return Math.atan2(deltaY, deltaX) * (180 / Math.PI) + 90;
+    }
+
+    function start(e) {
+        drag = true;
+        updateAngle(e);
+    }
+
+    function move(e) {
+        if (!drag) return;
+        updateAngle(e);
+    }
+
+    function stop() { 
+        drag = false; 
+    }
+
+    function updateAngle(e) {
+        const angle = getAngle(e);
+        cadran.style.setProperty('--angle', `${angle}deg`);
+    }
+
+    // Souris
+    cadran.addEventListener('mousedown', start);
+    window.addEventListener('mousemove', move);
+    window.addEventListener('mouseup', stop);
+
+    // Tactile (avec blocage du scroll de la page pendant qu'on tourne l'aiguille)
+    cadran.addEventListener('touchstart', (e) => { drag = true; updateAngle(e); e.preventDefault(); }, { passive: false });
+    window.addEventListener('touchmove', (e) => { if(drag) { updateAngle(e); e.preventDefault(); } }, { passive: false });
+    window.addEventListener('touchend', stop);
+
+    // Clavier
+    let keyboardAngle = 0;
+    cadran.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowLeft')  { keyboardAngle -= 15; }
+        if (e.key === 'ArrowRight') { keyboardAngle += 15; }
+        cadran.style.setProperty('--angle', `${keyboardAngle}deg`);
+    });
+
+    document.getElementById('startBtn').addEventListener('click', function() {
+        alert('Bonnes vacances.');
+    });
+})();
 </script>
-
 </body>
-
 </html>
-EOFgit add index.html
-git commit -m "Optimisation globale du code et ajout du style KG_ZFR"
-git push origin main
-
