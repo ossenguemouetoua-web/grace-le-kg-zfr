@@ -3,172 +3,165 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Programme des Vacances</title>
-
 <style>
-
-body{
-    margin:0;
-    font-family:Arial,sans-serif;
-    background:linear-gradient(135deg,#00c6ff,#0072ff);
-    color:white;
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    color: white;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
 }
 
-.container{
-    max-width:900px;
-    margin:auto;
-    padding:30px;
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 30px;
 }
 
-h1{
-    text-align:center;
-    font-size:40px;
+h1 {
+    text-align: center;
+    font-size: 40px;
+    text-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
-.section{
-    background:rgba(255,255,255,0.1);
-    padding:20px;
-    margin-top:25px;
-    border-radius:20px;
-    backdrop-filter:blur(8px);
+.section {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 20px;
+    margin-top: 25px;
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
 }
 
-h2{
-    color:#FFD700;
+h2 {
+    color: #FFD700;
 }
 
-ul{
-    list-style:none;
-    padding:0;
+ul {
+    list-style: none;
+    padding: 0;
 }
 
-li{
-    padding:10px;
-    margin:8px 0;
-    background:rgba(255,255,255,0.1);
-    border-radius:10px;
+li {
+    padding: 12px;
+    margin: 8px 0;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.objectif{
-    display:flex;
-    align-items:center;
-    gap:10px;
+.objectif {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 10px;
+    border-radius: 12px;
 }
 
-.footer{
-    text-align:center;
-    margin-top:40px;
-    opacity:0.8;
+.footer {
+    text-align: center;
+    margin-top: 40px;
+    opacity: 0.8;
 }
 
-button{
-    background:#FFD700;
-    color:black;
-    border:none;
-    padding:15px 30px;
-    border-radius:30px;
-    cursor:pointer;
-    font-size:18px;
-    font-weight:bold;
+/* Bouton style Apple / Bulle de verre */
+button {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 30px;
+    color: white;
+    padding: 15px 40px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2), 
+                inset 0 4px 4px rgba(255, 255, 255, 0.3);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-button:hover{
-    transform:scale(1.05);
+button:hover {
+    transform: scale(1.05);
+    background: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.3);
 }
 
+/* Animation des bulles d'eau au clic */
+.bulle-eau {
+    position: absolute;
+    background: radial-gradient(circle, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0) 70%);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    animation: eclatement 0.6s ease-out forwards;
+}
+
+@keyframes eclatement {
+    0% { width: 0px; height: 0px; opacity: 0.8; }
+    100% { width: 180px; height: 180px; opacity: 0; }
+}
 </style>
-
 </head>
-
 <body>
 
 <div class="container">
+    <h1>🌞 PROGRAMME DES VACANCES 🌞</h1>
 
-<h1>🌞 PROGRAMME DES VACANCES 🌞</h1>
+    <div class="section">
+        <h2>📱 Jeux et Tablettes</h2>
+        <ul>
+            <li>Mercredi : 12h00 – 18h00</li>
+            <li>Vendredi : 11h00 – 15h00</li>
+            <li>Samedi et Dimanche : 11h00 – 17h00</li>
+        </ul>
+    </div>
 
-<div class="section">
+    <div class="section">
+        <h2>📚 Activités éducatives</h2>
+        <ul>
+            <li>Lundi : Lecture – Sport – Méditation</li>
+            <li>Mardi : Lecture – Sport – Méditation</li>
+            <li>Jeudi : Lecture – Sport – Méditation</li>
+        </ul>
+    </div>
 
-<h2>📱 Jeux et Tablettes</h2>
+    <div class="section">
+        <h2>📜 Règlement</h2>
+        <p>
+            Les jeux vidéo et les tablettes sont autorisés uniquement aux horaires indiqués.
+            En dehors de ces périodes, les appareils doivent être rangés.
+            Le respect de ce programme permet de développer de bonnes habitudes et d'équilibrer loisirs, apprentissage et détente.
+        </p>
+    </div>
 
-<ul>
+    <div class="section">
+        <h2>🎯 Objectifs</h2>
+        <p class="objectif">✔ Développer le goût de la lecture</p>
+        <p class="objectif">✔ Pratiquer une activité physique</p>
+        <p class="objectif">✔ Mieux gérer le temps d'écran</p>
+        <p class="objectif">✔ Favoriser la concentration</p>
+        <p class="objectif">✔ Profiter pleinement des vacances</p>
+    </div>
 
-<li>Mercredi : 12h00 – 18h00</li>
+    <br><center>
+        <button onclick="alert('Bonnes vacances ! 🌞📚⚽')">
+            Commencer les vacances
+        </button>
+    </center>
 
-<li>Vendredi : 11h00 – 15h00</li>
-
-<li>Samedi et Dimanche : 11h00 – 17h00</li>
-
-</ul>
-
+    <div class="footer">
+        GRÂCE_LE_KG_ZFR © 2026
+    </div>
 </div>
 
-<div class="section">
-
-<h2>📚 Activités éducatives</h2>
-
-<ul>
-
-<li>Lundi : Lecture – Sport – Méditation</li>
-
-<li>Mardi : Lecture – Sport – Méditation</li>
-
-<li>Jeudi : Lecture – Sport – Méditation</li>
-
-</ul>
-
-</div>
-
-<div class="section">
-
-<h2>📜 Règlement</h2>
-
-<p>
-
-Les jeux vidéo et les tablettes sont autorisés uniquement aux horaires indiqués.
-
-En dehors de ces périodes, les appareils doivent être rangés.
-
-Le respect de ce programme permet de développer de bonnes habitudes et d'équilibrer loisirs, apprentissage et détente.
-
-</p>
-
-</div>
-
-<div class="section">
-
-<h2>🎯 Objectifs</h2>
-
-<p class="objectif">✔ Développer le goût de la lecture</p>
-
-<p class="objectif">✔ Pratiquer une activité physique</p>
-
-<p class="objectif">✔ Mieux gérer le temps d'écran</p>
-
-<p class="objectif">✔ Favoriser la concentration</p>
-
-<p class="objectif">✔ Profiter pleinement des vacances</p>
-
-</div>
-
-<center>
-
-<button onclick="alert('Bonnes vacances ! 🌞📚⚽')">
-
-Commencer les vacances
-
-</button>
-
-</center>
-
-<div class="footer">
-
-GRÂCE_LE_KG_ZFR © 2026
-
-</div>
-
-</div>
-
+<script src="script.js"></script>
 </body>
-
 </html>
