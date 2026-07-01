@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Programme des vacances - Édition Constellation">
+<meta name="description" content="ZFR Store • Sneakers, Sweats & Maillots Retro">
 <meta name="theme-color" content="#0E1116">
-<title>Programme des vacances • Constellation Élite</title>
+<title>ZFR Store • Urban & Retro Collection</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -39,211 +39,213 @@ canvas{
 }
 
 .wrap{
-    max-width: 840px;
+    max-width: 1100px;
     margin: auto;
-    padding: 80px 24px;
+    padding: 20px 24px 80px 24px;
 }
 
-header{ margin-bottom: 48px; position: relative; }
+/* Navigation */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 40px;
+}
+
+.brand {
+    font-family: 'Newsreader', serif;
+    font-size: 26px;
+    letter-spacing: -0.01em;
+    color: var(--paper);
+    font-weight: 500;
+}
+
+.cart-status {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--gold);
+    cursor: pointer;
+    border: 1px solid var(--line);
+    padding: 8px 18px;
+    border-radius: 50px;
+    background: rgba(255, 255, 255, 0.01);
+    transition: 0.3s;
+}
+.cart-status:hover {
+    border-color: var(--gold);
+    background: rgba(184, 146, 63, 0.05);
+}
+
+header{ margin-bottom: 40px; text-align: center; }
 
 .eyebrow{
     font-size: 11px;
-    letter-spacing: 4px;
+    letter-spacing: 5px;
     text-transform: uppercase;
     color: var(--gold);
-    margin-bottom: 16px;
+    margin-bottom: 12px;
     font-weight: 500;
 }
 
 h1{
     font-family: 'Newsreader', serif;
-    font-size: clamp(38px, 7vw, 56px);
+    font-size: clamp(32px, 5vw, 48px);
     font-weight: 400;
     letter-spacing: -0.02em;
     color: var(--paper);
-    line-height: 1.1;
+    line-height: 1.2;
     margin-bottom: 8px;
 }
 
-.sous-titre{
-    font-family: 'Newsreader', serif;
-    font-style: italic;
-    color: var(--paper-dim);
-    font-size: 16px;
+/* Filtres de catégorie */
+.filter-bar {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
 }
 
-/* Bandeau temporel premium */
-.meta-bar{
-    margin-top: 32px;
-    padding: 20px 28px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: rgba(255, 255, 255, 0.012);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
+.filter-btn {
+    background: transparent;
     border: 1px solid var(--line);
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-}
-
-.meta-group{
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.meta-bar .label{
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
     color: var(--paper-dim);
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-size: 12px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: 0.3s;
 }
 
-.meta-bar .value{
-    font-family: 'Newsreader', serif;
-    font-variant-numeric: tabular-nums;
-    color: var(--gold);
-    font-size: 19px;
+.filter-btn:hover, .filter-btn.active {
+    border-color: var(--gold);
+    color: var(--gold-bright);
+    background: rgba(184, 146, 63, 0.05);
 }
 
-.planning-grid{
-    display: flex;
-    flex-direction: column;
-    gap: 28px;
-    margin-top: 40px;
+/* Grille de Produits */
+.store-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 32px;
 }
 
-/* Cartes Holographiques Cyber-Luxe */
-.card{
-    background: rgba(255, 255, 255, 0.015);
+.product-card {
+    background: rgba(255, 255, 255, 0.01);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid var(--line);
-    padding: 32px;
-    border-radius: 24px;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s, box-shadow 0.4s;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s;
+    display: flex;
+    flex-direction: column;
 }
 
-.card:hover{
-    transform: translateY(-5px);
-    border-color: rgba(184, 146, 63, 0.35);
-    box-shadow: 0 15px 35px rgba(184, 146, 63, 0.03);
+.product-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(184, 146, 63, 0.3);
 }
 
-h2{
-    font-family: 'Newsreader', serif;
-    font-size: 25px;
-    font-weight: 400;
-    margin-bottom: 18px;
-    color: var(--paper);
+.product-image-container {
+    width: 100%;
+    height: 300px;
+    background: #141820;
+    overflow: hidden;
+    position: relative;
     border-bottom: 1px solid var(--line);
-    padding-bottom: 14px;
 }
 
-.agenda-list{ list-style: none; }
+.product-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
 
-.agenda-list li{
+.product-card:hover .product-img {
+    transform: scale(1.04);
+}
+
+.product-info {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.product-meta {
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
-    padding: 14px 0;
-    border-bottom: 1px dashed var(--line);
-    font-size: 15px;
-}
-.agenda-list li:last-child{ border-bottom: none; }
-
-.agenda-list .time{
-    color: var(--paper-dim);
-    font-variant-numeric: tabular-nums;
-    text-align: right;
+    align-items: flex-start;
+    margin-bottom: 8px;
+    gap: 12px;
 }
 
-.objectifs-list{ list-style: none; }
-.objectifs-list li{
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 14px 0;
-    border-bottom: 1px dashed var(--line);
-    font-size: 15px;
-}
-.objectifs-list li:last-child{ border-bottom: none; }
-
-.dot{
-    width: 5px; height: 5px;
-    border-radius: 50%;
-    background: var(--gold);
-    flex-shrink: 0;
-    box-shadow: 0 0 8px var(--gold);
+.product-title {
+    font-family: 'Newsreader', serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--paper);
+    line-height: 1.2;
 }
 
-.action{
-    margin-top: 64px;
-    display: flex;
-    justify-content: center;
-}
-
-/* Bouton à impulsion lumineuse */
-button{
+.product-price {
     font-family: 'Inter', sans-serif;
-    padding: 18px 54px;
+    font-size: 15px;
+    color: var(--gold-bright);
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.product-desc {
+    font-size: 12px;
+    color: var(--paper-dim);
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
+
+.btn-buy {
+    font-family: 'Inter', sans-serif;
+    width: 100%;
+    padding: 12px;
     border: 1px solid var(--gold);
     background: transparent;
     color: var(--gold);
-    font-size: 12px;
-    letter-spacing: 4px;
+    font-size: 11px;
+    letter-spacing: 2px;
     font-weight: 500;
     text-transform: uppercase;
     cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    transition: color 0.3s, transform 0.2s, border-color 0.3s;
+    border-radius: 8px;
+    transition: 0.3s;
 }
 
-button::before{
-    content: "";
-    position: absolute;
-    inset: 0;
+.btn-buy:hover {
     background: var(--gold);
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    z-index: -1;
-}
-
-button:hover{ color: var(--ink); border-color: var(--gold-bright); }
-button:hover::before{ transform: scaleX(1); transform-origin: left; }
-button:active{ transform: scale(0.97); }
-
-button:focus-visible{
-    outline: 2px solid var(--gold);
-    outline-offset: 4px;
+    color: var(--ink);
 }
 
 footer{
-    margin-top: 96px;
+    margin-top: 80px;
     text-align: center;
     font-size: 11px;
     letter-spacing: 3px;
     color: var(--paper-dim);
+    border-top: 1px solid var(--line);
+    padding-top: 40px;
 }
 
 .fade-in{
     opacity: 0;
-    transform: translateY(25px);
-    animation: raise 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    transform: translateY(20px);
+    animation: raise 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 @keyframes raise{ to{ opacity: 1; transform: translateY(0); } }
-
-@media (prefers-reduced-motion: reduce){
-    *{ animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
-}
-
-@media (max-width: 600px){
-    .wrap{ padding: 56px 16px; }
-    .meta-bar{ flex-direction: column; align-items: flex-start; gap: 14px; padding: 20px; }
-}
 </style>
 </head>
 <body>
@@ -251,58 +253,169 @@ footer{
 <canvas id="c" aria-hidden="true"></canvas>
 
 <div class="wrap">
-    <header class="fade-in">
-        <p class="eyebrow">Calendrier personnel</p>
-        <h1>Programme des vacances</h1>
-        <p class="sous-titre">Répartition des temps d'écran, des activités d'apprentissage et de développement physique.</p>
+    <nav class="fade-in">
+        <div class="brand">ZFR Store</div>
+        <div class="cart-status" id="cartBtn">Panier (<span id="cartCount">0</span>)</div>
+    </nav>
 
-        <div class="meta-bar">
-            <div class="meta-group">
-                <span class="label">Aujourd'hui</span>
-                <span class="value" id="date">—</span>
-            </div>
-            <div class="meta-group">
-                <span class="label">Heure locale</span>
-                <span class="value" id="clock">00:00:00</span>
-            </div>
-        </div>
+    <header class="fade-in" style="animation-delay: 0.1s">
+        <p class="eyebrow">Exclusivités Urbaines</p>
+        <h1>Sneakers & Retro Clothing</h1>
     </header>
 
-    <div class="planning-grid">
-        <section class="card fade-in" style="animation-delay: 0.1s">
-            <h2>Jeux et tablettes</h2>
-            <ul class="agenda-list">
-                <li><span>Mercredi</span><span class="time">12 h 00 – 18 h 00</span></li>
-                <li><span>Vendredi</span><span class="time">11 h 00 – 15 h 00</span></li>
-                <li><span>Samedi &amp; dimanche</span><span class="time">11 h 00 – 17 h 00</span></li>
-            </ul>
-        </section>
-
-        <section class="card fade-in" style="animation-delay: 0.18s">
-            <h2>Activités quotidiennes</h2>
-            <ul class="agenda-list">
-                <li><span>Lecture</span><span class="time">Tous les jours</span></li>
-                <li><span>Sport</span><span class="time">45 min</span></li>
-                <li><span>Méditation</span><span class="time">20 min</span></li>
-            </ul>
-        </section>
-
-        <section class="card fade-in" style="animation-delay: 0.26s">
-            <h2>Objectifs fondamentaux</h2>
-            <ul class="objectifs-list">
-                <li><span class="dot"></span><span>Développer la lecture personnelle</span></li>
-                <li><span class="dot"></span><span>Maintenir une régularité physique</span></li>
-                <li><span class="dot"></span><span>Réduire le temps d'écran</span></li>
-            </ul>
-        </section>
+    <div class="filter-bar fade-in" style="animation-delay: 0.15s">
+        <button class="filter-btn active" onclick="filterCat('all', this)">Tout</button>
+        <button class="filter-btn" onclick="filterCat('sneakers', this)">Sneakers</button>
+        <button class="filter-btn" onclick="filterCat('sweats', this)">Sweats</button>
+        <button class="filter-btn" onclick="filterCat('maillots', this)">Maillots Rétro</button>
     </div>
 
-    <div class="action fade-in" style="animation-delay: 0.34s">
-        <button id="startBtn" type="button">Initialiser la session</button>
+    <div class="store-grid">
+        
+        <div class="product-card fade-in" data-cat="sneakers">
+            <div class="product-image-container">
+                <img src="5a98cbeb-3110-4db3-a55f-92bed3b23ec9-1_all_3757.jpg" alt="Nike Air Force 1 White" class="product-img">
+            </div>
+            <div class="product-info">
+                <div class="product-meta">
+                    <h2 class="product-title">Nike Air Force 1 Low • White</h2>
+                    <span class="product-price">15 000 F</span>
+                </div>
+                <p class="product-desc">L'indémodable classique tout en blanc. Silhouette iconique passe-partout.</p>
+                <button class="btn-buy" onclick="addToCart('Air Force 1 White')">Ajouter</button>
+            </div>
+        </div>
+
+        <div class="product-card fade-in" data-cat="sneakers">
+            <div class="product-image-container">
+                <img src="5a98cbeb-3110-4db3-a55f-92bed3b23ec9-1_all_3758.jpg" alt="Puma Suede Classic" class="product-img">
+            </div>
+            <div class="product-info">
+                <div class="product-meta">
+                    <h2 class="product-title">Puma Suede • Black & White</h2>
+                    <span class="product-price">15 000 F</span>
+                </div>
+                <p class="product-desc">Style décontracté en daim premium noir avec sa bande blanche classique.</p>
+                <button class="btn-buy" onclick="addToCart('Puma Suede')">Ajouter</button>
+            </div>
+        </div>
+
+        <div class="product-card fade-in" data-cat="sneakers">
+            <div class="product-image-container">
+                <img src="5a98cbeb-3110-4db3-a55f-92bed3b23ec9-1_all_3759.jpg" alt="Adidas Running" class="product-img">
+            </div>
+            <div class="product-info">
+                <div class="product-meta">
+                    <h2 class="product-title">Adidas Running • Gris & Orange</h2>
+                    <span class="product-price">22 000 F</span>
+                </div>
+                <p class="product-desc">Paire dynamique alliant confort running et design moderne urbain.</p>
+                <button class="btn-buy" onclick="addToCart('Adidas Running')">Ajouter</button>
+            </div>
+        </div>
+
+        <div class="product-card fade-in" data-cat="sneakers">
+            <div class="product-image-container">
+                <img src="5a98cbeb-3110-4db3-a55f-92bed3b23ec9-1_all_3756.jpg" alt="Nike Air Force 1 Black" class="product-img">
+            </div>
+            <div class="product-info">
+                <div class="product-meta">
+                    <h2 class="product-title">Nike Air Force 1 Low • Black</h2>
+                    <span class="product-price">15 000 F</span>
+                </div>
+                <p class="product-desc">Version Triple Black de la Air Force 1. Un style sombre et robuste.</p>
+                <button class="btn-buy" onclick="addToCart('Air Force 1 Black')">Ajouter</button>
+            </div>
+        </div>
+
+        <div class="product-card fade-in" data-cat="sneakers">
+            <div class="product-image-container">
+                <img src="5a98cbeb-3110-4db3-a55f-92bed3b23ec9-1_all_3755.jpg" alt="Nike Dunk Low Panda" class="product-img">
+            </div>
+            <div class="product-info">
+                <div class="product-meta">
+                    <h2 class="product-title">Nike Dunk Low • Panda</h2>
+                    <span class="product-price">17 000 F</span>
+                </div>
+                <p class="product-desc">Contraste noir et blanc incontournable sur une coupe rétro classique.</p>
+                <button class="btn-buy" onclick="addToCart('Dunk Low Panda')">Ajouter</button>
+            </div>
+        </div>
+
+        <div class="product-card fade-in" data-cat="sweats">
+            <div class="product-image-container">
+                <img src="5a98cbeb-3110-4db3-a55f-92bed3b23ec9-1_all_1563.jpg" alt="Sweat Noir" class="product-img">
+            </div>
+            <div class="product-info">
+                <div class="product-meta">
+                    <h2 class="product-title">Zip Hoodie • Noir Uni</h2>
+                    <span class="product-price">12 000 F</span>
+                </div>
+                <p class="product-desc">Sweat à capuche zippé épais. Coupe moderne, confortable et épurée.</p>
+                <button class="btn-buy" onclick="addToCart('Sweat Noir')">Ajouter</button>
+            </div>
+        </div>
+
+        <div class="product-card fade-in" data-cat="sweats">
+            <div class="product-image-container">
+                <img src="5a98cbeb-3110-4db3-a55f-92bed3b23ec9-1_all_1562.jpg" alt="Sweat Gris" class="product-img">
+            </div>
+            <div class="product-info">
+                <div class="product-meta">
+                    <h2 class="product-title">Zip Hoodie • Gris Chiné</h2>
+                    <span class="product-price">12 000 F</span>
+                </div>
+                <p class="product-desc">Le basique indispensable en coton doux, idéal pour le quotidien.</p>
+                <button class="btn-buy" onclick="addToCart('Sweat Gris')">Ajouter</button>
+            </div>
+        </div>
+
+        <div class="product-card fade-in" data-cat="maillots">
+            <div class="product-image-container">
+                <img src="5a98cbeb-3110-4db3-a55f-92bed3b23ec9-1_all_1535.jpg" alt="Maillot Man U Retro" class="product-img">
+            </div>
+            <div class="product-info">
+                <div class="product-meta">
+                    <h2 class="product-title">Manchester United • Sharp Retro</h2>
+                    <span class="product-price">15 000 F</span>
+                </div>
+                <p class="product-desc">Maillot mythique rouge éclatant brodé du sponsor historique Sharp.</p>
+                <button class="btn-buy" onclick="addToCart('Maillot Man United')">Ajouter</button>
+            </div>
+        </div>
+
+        <div class="product-card fade-in" data-cat="maillots">
+            <div class="product-image-container">
+                <img src="5a98cbeb-3110-4db3-a55f-92bed3b23ec9-1_all_1537.jpg" alt="Maillot Barca Retro" class="product-img">
+            </div>
+            <div class="product-info">
+                <div class="product-meta">
+                    <h2 class="product-title">FC Barcelone • Kappa Vintage</h2>
+                    <span class="product-price">15 000 F</span>
+                </div>
+                <p class="product-desc">Le mythique design Blaugrana des années 90 signé Kappa.</p>
+                <button class="btn-buy" onclick="addToCart('Maillot Barcelone')">Ajouter</button>
+            </div>
+        </div>
+
+        <div class="product-card fade-in" data-cat="maillots">
+            <div class="product-image-container">
+                <img src="5a98cbeb-3110-4db3-a55f-92bed3b23ec9-1_all_1530.jpg" alt="Maillot OM Retro" class="product-img">
+            </div>
+            <div class="product-info">
+                <div class="product-meta">
+                    <h2 class="product-title">Olympique de Marseille • Ericsson</h2>
+                    <span class="product-price">15 000 F</span>
+                </div>
+                <p class="product-desc">Maillot rétro ciel satiné avec le col polo classique et sponsor Ericsson.</p>
+                <button class="btn-buy" onclick="addToCart('Maillot OM')">Ajouter</button>
+            </div>
+        </div>
+
     </div>
 
-    <footer class="fade-in" style="animation-delay: 0.4s">
-        GRÂCE_LE_KG_ZFR · 2026
+    <footer class="fade-in">
+        ZFR STORE • GRACE_LE_KG_ZFR © 2026
     </footer>
 </div>
 
@@ -310,29 +423,39 @@ footer{
 (function(){
     "use strict";
 
-    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // Système de Panier
+    var cartCount = 0;
+    var countEl = document.getElementById('cartCount');
+    
+    window.addToCart = function(name) {
+        cartCount++;
+        countEl.textContent = cartCount;
+    };
 
-    // Date et heure synchronisées
-    var clock = document.getElementById('clock');
-    var dateEl = document.getElementById('date');
-    function tick(){
-        var now = new Date();
-        clock.textContent = now.toLocaleTimeString('fr-FR');
-        dateEl.textContent = now.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
-    }
-    tick();
-    setInterval(tick, 1000);
+    document.getElementById('cartBtn').onclick = function() {
+        alert("Votre panier contient " + cartCount + " article(s).");
+    };
 
-    document.getElementById('startBtn').addEventListener('click', function(){
-        alert('Session initialisée. Bonnes vacances ! 🚀');
-    });
+    // Système de Filtrage Dynamique
+    window.filterCat = function(category, button) {
+        // Switch bouton actif
+        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
 
-    // Moteur de Constellation Interactive (Arrière-plan Canvas)
+        // Filtrage des cartes
+        document.querySelectorAll('.product-card').forEach(card => {
+            if(category === 'all' || card.getAttribute('data-cat') === category) {
+                card.style.display = 'flex';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    };
+
+    // Arrière-plan Interactif (Canvas Constellation)
     var c = document.getElementById('c');
     var ctx = c.getContext('2d');
     var pointer = { x: -9999, y: -9999 };
-    var running = !reduceMotion && !document.hidden;
-    var rafId = null;
 
     function resize(){
         c.width = window.innerWidth;
@@ -341,104 +464,59 @@ footer{
     resize();
     window.addEventListener('resize', resize);
 
-    var particleCount = window.innerWidth < 600 ? 45 : 100;
     var particles = [];
-    for (var i = 0; i < particleCount; i++){
+    for (var i = 0; i < 60; i++){
         particles.push({
             x: Math.random() * window.innerWidth,
             y: Math.random() * window.innerHeight,
-            r: Math.random() * 1.5 + 0.5,
-            vx: (Math.random() - 0.5) * 0.35,
-            vy: (Math.random() - 0.5) * 0.35
+            r: Math.random() * 1.2 + 0.5,
+            vx: (Math.random() - 0.5) * 0.25,
+            vy: (Math.random() - 0.5) * 0.25
         });
     }
 
-    function trackPointer(e){
+    function track(e){
         pointer.x = e.touches ? e.touches[0].clientX : e.clientX;
         pointer.y = e.touches ? e.touches[0].clientY : e.clientY;
     }
-    window.addEventListener('mousemove', trackPointer, { passive: true });
-    window.addEventListener('touchstart', trackPointer, { passive: true });
-    window.addEventListener('touchmove', trackPointer, { passive: true });
+    window.addEventListener('mousemove', track, { passive: true });
+    window.addEventListener('touchstart', track, { passive: true });
+    window.addEventListener('touchmove', track, { passive: true });
     window.addEventListener('touchend', function(){ pointer.x = -9999; pointer.y = -9999; });
 
-    function animate(){
-        if (!running) return;
+    (function animate(){
         ctx.clearRect(0, 0, c.width, c.height);
-
-        // Rendu et logique des connexions cinétiques
         particles.forEach(function(p, idx){
-            p.x += p.vx;
-            p.y += p.vy;
+            p.x += p.vx; p.y += p.vy;
+            if (p.x < 0) p.x = c.width; if (p.x > c.width) p.x = 0;
+            if (p.y < 0) p.y = c.height; if (p.y > c.height) p.y = 0;
 
-            if (p.x < 0) p.x = c.width;
-            if (p.x > c.width) p.x = 0;
-            if (p.y < 0) p.y = c.height;
-            if (p.y > c.height) p.y = 0;
-
-            // Magnétisme de proximité avec le pointeur
             if (pointer.x !== -9999){
-                var dxPointer = pointer.x - p.x;
-                var dyPointer = pointer.y - p.y;
-                var distPointer = Math.sqrt(dxPointer * dxPointer + dyPointer * dyPointer);
-                if (distPointer < 140 && distPointer > 0){
-                    var force = (140 - distPointer) / 140;
-                    p.x += (dxPointer / distPointer) * force * 1.8;
-                    p.y += (dyPointer / distPointer) * force * 1.8;
+                var dxP = pointer.x - p.x; var dyP = pointer.y - p.y;
+                var distP = Math.sqrt(dxP*dxP + dyP*dyP);
+                if (distP < 120){
+                    var f = (120 - distP) / 120;
+                    p.x += (dxP / distP) * f * 1.2;
+                    p.y += (dyP / distP) * f * 1.2;
                 }
             }
 
-            // Dessin des lignes de liaison (Constellation)
             for (var j = idx + 1; j < particles.length; j++) {
                 var p2 = particles[j];
-                var dx = p.x - p2.x;
-                var dy = p.y - p2.y;
-                var dist = Math.sqrt(dx * dx + dy * dy);
-
-                // Ne dessine des liens que si les particules sont proches
+                var dx = p.x - p2.x; var dy = p.y - p2.y;
+                var dist = Math.sqrt(dx*dx + dy*dy);
                 if (dist < 90) {
-                    var alpha = (90 - dist) / 90 * 0.13;
+                    var alpha = (90 - dist) / 90 * 0.1;
                     ctx.strokeStyle = 'rgba(184, 146, 63, ' + alpha + ')';
-                    ctx.lineWidth = 0.6;
-                    ctx.beginPath();
-                    ctx.moveTo(p.x, p.y);
-                    ctx.lineTo(p2.x, p2.y);
-                    ctx.stroke();
+                    ctx.lineWidth = 0.5;
+                    ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p2.x, p2.y); ctx.stroke();
                 }
             }
-
-            // Dessin individuel de la particule d'or
-            ctx.fillStyle = 'rgba(184, 146, 63, 0.55)';
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-            ctx.fill();
+            ctx.fillStyle = 'rgba(184, 146, 63, 0.3)';
+            ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
         });
-
-        rafId = requestAnimationFrame(animate);
-    }
-
-    if (reduceMotion){
-        ctx.clearRect(0, 0, c.width, c.height);
-        ctx.fillStyle = 'rgba(184, 146, 63, 0.4)';
-        particles.forEach(function(p){
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-            ctx.fill();
-        });
-    } else {
-        animate();
-    }
-
-    document.addEventListener('visibilitychange', function(){
-        if (reduceMotion) return;
-        if (document.hidden){
-            running = false;
-            if (rafId) cancelAnimationFrame(rafId);
-        } else {
-            running = true;
-            animate();
-        }
-    });
+        requestAnimationFrame(animate);
+    })();
 })();
 </script>
 </body>
