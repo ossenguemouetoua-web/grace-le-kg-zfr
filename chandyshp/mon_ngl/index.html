@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Programme des vacances">
+<meta name="theme-color" content="#0E1116">
+<title>Programme des vacances</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+    --ink: #0E1116;
+    --paper: #EDE8DD;
+    --paper-dim: #B9B3A4;
+    --gold: #B8923F;
+    --line: rgba(237, 232, 221, 0.07);
+}
+
+*{ margin:0; padding:0; box-sizing:border-box; }
+html{ scroll-behavior: smooth; }
+
+body{
+    background: var(--ink);
+    font-family: 'Inter', sans-serif;
+    color: var(--paper);
+    overflow-x: hidden;
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+canvas{
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.wrap{
+    max-width: 840px;
+    margin: auto;
+    padding: 80px 24px;
+}
+
+header{ margin-bottom: 48px; position: relative; }
+
+.eyebrow{
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+    font-weight: 500;
+}
+
+h1{
+    font-family: 'Newsreader', serif;
+    font-size: clamp(38px, 7vw, 56px);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    color: var(--paper);
+    line-height: 1.1;
+    margin-bottom: 8px;
+}
+
+.sous-titre{
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    color: var(--paper-dim);
+    font-size: 16px;
+}
+
+/* Bandeau date / heure réelles, pas de chiffres inventés */
+.meta-bar{
+    margin-top: 32px;
+    padding: 18px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    background: rgba(255, 255, 255, 0.015);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+}
+
+.meta-bar .label{
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--paper-dim);
+}
+
+.meta-bar .value{
+    font-family: 'Newsreader', serif;
+    font-variant-numeric: tabular-nums;
+    color: var(--gold);
+    font-size: 18px;
+}
+
+.planning-grid{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-top: 40px;
+}
+
+.card{
+    background: rgba(255, 255, 255, 0.015);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--line);
+    padding: 28px;
+    border-radius: 24px;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s;
+}
+
+.card:hover{
+    transform: translateY(-4px);
+    border-color: rgba(184, 146, 63, 0.25);
+}
+
+h2{
+    font-family: 'Newsreader', serif;
+    font-size: 24px;
+    font-weight: 400;
+    margin-bottom: 16px;
+    color: var(--paper);
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 12px;
+}
+
+.agenda-list{ list-style: none; }
+
+.agenda-list li{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 12px 0;
+    border-bottom: 1px dashed var(--line);
+    font-size: 15px;
+}
+.agenda-list li:last-child{ border-bottom: none; }
+
+.agenda-list .time{
+    color: var(--paper-dim);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+.objectifs-list{ list-style: none; }
+.objectifs-list li{
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px dashed var(--line);
+    font-size: 15px;
+}
+.objectifs-list li:last-child{ border-bottom: none; }
+
+.dot{
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--gold);
+    flex-shrink: 0;
+}
+
+.action{
+    margin-top: 56px;
+    display: flex;
+    justify-content: center;
+}
+
+button{
+    font-family: 'Inter', sans-serif;
+    padding: 16px 48px;
+    border: 1px solid var(--gold);
+    background: transparent;
+    color: var(--gold);
+    font-size: 12px;
+    letter-spacing: 3px;
+    font-weight: 500;
+    text-transform: uppercase;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: color 0.3s, transform 0.2s;
+}
+
+button::before{
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: -1;
+}
+
+button:hover{ color: var(--ink); }
+button:hover::before{ transform: scaleX(1); transform-origin: left; }
+button:active{ transform: scale(0.98); }
+
+button:focus-visible{
+    outline: 2px solid var(--gold);
+    outline-offset: 4px;
+}
+
+footer{
+    margin-top: 80px;
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--paper-dim);
+}
+
+.fade-in{
+    opacity: 0;
+    transform: translateY(20px);
+    animation: raise 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes raise{ to{ opacity: 1; transform: translateY(0); } }
+
+@media (prefers-reduced-motion: reduce){
+    *{ animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+@media (max-width: 600px){
+    .wrap{ padding: 48px 16px; }
+    .meta-bar{ flex-direction: column; align-items: flex-start; gap: 6px; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="c" aria-hidden="true"></canvas>
+
+<div class="wrap">
+    <header class="fade-in">
+        <p class="eyebrow">Calendrier personnel</p>
+        <h1>Programme des vacances</h1>
+        <p class="sous-titre">Répartition des temps d'écran, des activités d'apprentissage et de développement physique.</p>
+
+        <div class="meta-bar">
+            <span class="label">Aujourd'hui</span>
+            <span class="value" id="date">—</span>
+            <span class="label">Heure locale</span>
+            <span class="value" id="clock">00:00:00</span>
+        </div>
+    </header>
+
+    <div class="planning-grid">
+        <section class="card fade-in" style="animation-delay: 0.1s">
+            <h2>Jeux et tablettes</h2>
+            <ul class="agenda-list">
+                <li><span>Mercredi</span><span class="time">12 h 00 – 18 h 00</span></li>
+                <li><span>Vendredi</span><span class="time">11 h 00 – 15 h 00</span></li>
+                <li><span>Samedi &amp; dimanche</span><span class="time">11 h 00 – 17 h 00</span></li>
+            </ul>
+        </section>
+
+        <section class="card fade-in" style="animation-delay: 0.18s">
+            <h2>Activités quotidiennes</h2>
+            <ul class="agenda-list">
+                <li><span>Lecture</span><span class="time">Tous les jours</span></li>
+                <li><span>Sport</span><span class="time">45 min</span></li>
+                <li><span>Méditation</span><span class="time">20 min</span></li>
+            </ul>
+        </section>
+
+        <section class="card fade-in" style="animation-delay: 0.26s">
+            <h2>Objectifs</h2>
+            <ul class="objectifs-list">
+                <li><span class="dot"></span><span>Développer la lecture personnelle</span></li>
+                <li><span class="dot"></span><span>Maintenir une régularité physique</span></li>
+                <li><span class="dot"></span><span>Réduire le temps d'écran</span></li>
+            </ul>
+        </section>
+    </div>
+
+    <div class="action fade-in" style="animation-delay: 0.34s">
+        <button id="startBtn" type="button">Commencer</button>
+    </div>
+
+    <footer class="fade-in" style="animation-delay: 0.4s">
+        GRÂCE_LE_KG_ZFR · 2026
+    </footer>
+</div>
+
+<script>
+(function(){
+    "use strict";
+
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Date et heure réelles
+    var clock = document.getElementById('clock');
+    var dateEl = document.getElementById('date');
+    function tick(){
+        var now = new Date();
+        clock.textContent = now.toLocaleTimeString('fr-FR');
+        dateEl.textContent = now.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
+    }
+    tick();
+    setInterval(tick, 1000);
+
+    document.getElementById('startBtn').addEventListener('click', function(){
+        alert('Bonnes vacances.');
+    });
+
+    // Champ de particules magnétiques en arrière-plan
+    var c = document.getElementById('c');
+    var ctx = c.getContext('2d');
+    var pointer = { x: -9999, y: -9999 };
+    var running = !reduceMotion && !document.hidden;
+    var rafId = null;
+
+    function resize(){
+        c.width = window.innerWidth;
+        c.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    var particleCount = window.innerWidth < 600 ? 50 : 110;
+    var particles = [];
+    for (var i = 0; i < particleCount; i++){
+        particles.push({
+            x: Math.random() * window.innerWidth,
+            y: Math.random() * window.innerHeight,
+            r: Math.random() * 1.8 + 0.4,
+            vx: (Math.random() - 0.5) * 0.4,
+            vy: (Math.random() - 0.5) * 0.4
+        });
+    }
+
+    function trackPointer(e){
+        pointer.x = e.touches ? e.touches[0].clientX : e.clientX;
+        pointer.y = e.touches ? e.touches[0].clientY : e.clientY;
+    }
+    window.addEventListener('mousemove', trackPointer, { passive: true });
+    window.addEventListener('touchstart', trackPointer, { passive: true });
+    window.addEventListener('touchmove', trackPointer, { passive: true });
+    window.addEventListener('touchend', function(){ pointer.x = -9999; pointer.y = -9999; });
+
+    function drawStatic(){
+        ctx.clearRect(0, 0, c.width, c.height);
+        ctx.fillStyle = 'rgba(184, 146, 63, 0.45)';
+        particles.forEach(function(p){
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fill();
+        });
+    }
+
+    function animate(){
+        if (!running) return;
+        ctx.clearRect(0, 0, c.width, c.height);
+        ctx.fillStyle = 'rgba(184, 146, 63, 0.55)';
+
+        particles.forEach(function(p){
+            p.x += p.vx;
+            p.y += p.vy;
+
+            if (p.x < 0) p.x = c.width;
+            if (p.x > c.width) p.x = 0;
+            if (p.y < 0) p.y = c.height;
+            if (p.y > c.height) p.y = 0;
+
+            if (pointer.x !== -9999){
+                var dx = pointer.x - p.x;
+                var dy = pointer.y - p.y;
+                var dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < 130 && dist > 0){
+                    var force = (130 - dist) / 130;
+                    p.x += (dx / dist) * force * 2;
+                    p.y += (dy / dist) * force * 2;
+                }
+            }
+
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fill();
+        });
+
+        rafId = requestAnimationFrame(animate);
+    }
+
+    // Respecte la préférence de réduction de mouvement : champ statique uniquement
+    if (reduceMotion){
+        drawStatic();
+    } else {
+        animate();
+    }
+
+    // Coupe l'animation quand l'onglet n'est pas visible, économise la batterie
+    document.addEventListener('visibilitychange', function(){
+        if (reduceMotion) return;
+        if (document.hidden){
+            running = false;
+            if (rafId) cancelAnimationFrame(rafId);
+        } else {
+            running = true;
+            animate();
+        }
+    });
+})();
+</script>
+</body>
+</html>
+ 
