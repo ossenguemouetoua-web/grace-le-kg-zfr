@@ -2,10 +2,62 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Programme des vacances</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programme des vacances - Focus</title>
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink: #0E1116; --paper: #EDE8DD; --paper-dim: #B9B3A4;
+            --gold: #B8923F; --line: rgba(237, 232, 221, 0.07);
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { background: var(--ink); font-family: 'Inter', sans-serif; color: var(--paper); min-height: 100vh; }
+        .wrap { max-width: 840px; margin: auto; padding: 80px 24px; }
+        .done { text-decoration: line-through; opacity: 0.5; }
+        .task-item { cursor: pointer; transition: 0.3s; padding: 10px 0; display: flex; justify-content: space-between; }
+        .task-item:hover { color: var(--gold); }
+        #timer { font-size: 2rem; color: var(--gold); font-family: monospace; display: block; margin: 20px 0; }
+        .focus-mode { border: 1px solid var(--gold); padding: 20px; border-radius: 10px; background: rgba(184, 146, 63, 0.1); }
+    </style>
 </head>
 <body>
-    <h1>Programme des vacances</h1>
-    <a href="index.html">Retour à la boutique</a>
+<div class="wrap">
+    <header>
+        <h1>Programme des vacances</h1>
+        <div id="timer">25:00</div>
+    </header>
+    <div class="planning-grid">
+        <section class="card">
+            <h2>Activités quotidiennes</h2>
+            <ul class="agenda-list" id="task-list">
+                <li class="task-item"><span>Lecture</span><span>Tous les jours</span></li>
+                <li class="task-item"><span>Sport</span><span>45 min</span></li>
+                <li class="task-item"><span>Méditation</span><span>20 min</span></li>
+            </ul>
+        </section>
+    </div>
+    <div class="action" style="margin-top:20px;">
+        <button id="startBtn" style="padding:10px 20px; cursor:pointer;">Lancer Focus (25min)</button>
+        <br><br>
+        <a href="index.html" style="color: var(--paper-dim);">Retour à la boutique</a>
+    </div>
+</div>
+<script>
+    document.querySelectorAll('.task-item').forEach(item => {
+        item.addEventListener('click', () => item.classList.toggle('done'));
+    });
+    let timerInterval;
+    document.getElementById('startBtn').addEventListener('click', function() {
+        let seconds = 25 * 60;
+        const display = document.getElementById('timer');
+        clearInterval(timerInterval);
+        timerInterval = setInterval(() => {
+            let m = Math.floor(seconds / 60);
+            let s = seconds % 60;
+            display.textContent = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+            if (--seconds < 0) { clearInterval(timerInterval); alert('Session terminée !'); }
+        }, 1000);
+    });
+</script>
 </body>
 </html>
