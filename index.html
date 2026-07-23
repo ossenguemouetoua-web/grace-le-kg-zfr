@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 <style>
 :root{
     --ink: #0E1116;
@@ -274,7 +275,7 @@ footer{
         
         <div class="product-card fade-in" data-cat="sneakers">
             <div class="product-image-container">
-                <img src="5a98cbeb-3110-4db3-a55f-92bed3b23ec9-1_all_3757.jpg" alt="Nike Air Force 1 White" class="product-img">
+                <img src="shot.jpg" alt="Nike Air Force 1 White" class="product-img">
             </div>
             <div class="product-info">
                 <div class="product-meta">
@@ -288,7 +289,7 @@ footer{
 
         <div class="product-card fade-in" data-cat="sneakers">
             <div class="product-image-container">
-                <img src="5a98cbeb-3110-4db3-a55f-92bed3b23ec9-1_all_3758.jpg" alt="Puma Suede Classic" class="product-img">
+                <img src="shot.jpg" alt="Puma Suede Classic" class="product-img">
             </div>
             <div class="product-info">
                 <div class="product-meta">
@@ -302,7 +303,7 @@ footer{
 
         <div class="product-card fade-in" data-cat="sneakers">
             <div class="product-image-container">
-                <img src="5a98cbeb-3110-4db3-a55f-92bed3b23ec9-1_all_3759.jpg" alt="Adidas Running" class="product-img">
+                <img src="shot.jpg" alt="Adidas Running" class="product-img">
             </div>
             <div class="product-info">
                 <div class="product-meta">
@@ -316,7 +317,7 @@ footer{
 
         <div class="product-card fade-in" data-cat="sneakers">
             <div class="product-image-container">
-                <img src="5a98cbeb-3110-4db3-a55f-92bed3b23ec9-1_all_3756.jpg" alt="Nike Air Force 1 Black" class="product-img">
+                <img src="shot.jpg" alt="Nike Air Force 1 Black" class="product-img">
             </div>
             <div class="product-info">
                 <div class="product-meta">
@@ -330,7 +331,7 @@ footer{
 
         <div class="product-card fade-in" data-cat="sneakers">
             <div class="product-image-container">
-                <img src="5a98cbeb-3110-4db3-a55f-92bed3b23ec9-1_all_3755.jpg" alt="Nike Dunk Low Panda" class="product-img">
+                <img src="shot.jpg" alt="Nike Dunk Low Panda" class="product-img">
             </div>
             <div class="product-info">
                 <div class="product-meta">
@@ -344,7 +345,7 @@ footer{
 
         <div class="product-card fade-in" data-cat="sweats">
             <div class="product-image-container">
-                <img src="5a98cbeb-3110-4db3-a55f-92bed3b23ec9-1_all_1563.jpg" alt="Sweat Noir" class="product-img">
+                <img src="shot.jpg" alt="Sweat Noir" class="product-img">
             </div>
             <div class="product-info">
                 <div class="product-meta">
@@ -358,7 +359,7 @@ footer{
 
         <div class="product-card fade-in" data-cat="sweats">
             <div class="product-image-container">
-                <img src="5a98cbeb-3110-4db3-a55f-92bed3b23ec9-1_all_1562.jpg" alt="Sweat Gris" class="product-img">
+                <img src="shot.jpg" alt="Sweat Gris" class="product-img">
             </div>
             <div class="product-info">
                 <div class="product-meta">
@@ -372,7 +373,7 @@ footer{
 
         <div class="product-card fade-in" data-cat="maillots">
             <div class="product-image-container">
-                <img src="5a98cbeb-3110-4db3-a55f-92bed3b23ec9-1_all_1535.jpg" alt="Maillot Man U Retro" class="product-img">
+                <img src="shot.jpg" alt="Maillot Man U Retro" class="product-img">
             </div>
             <div class="product-info">
                 <div class="product-meta">
@@ -386,7 +387,7 @@ footer{
 
         <div class="product-card fade-in" data-cat="maillots">
             <div class="product-image-container">
-                <img src="5a98cbeb-3110-4db3-a55f-92bed3b23ec9-1_all_1537.jpg" alt="Maillot Barca Retro" class="product-img">
+                <img src="shot.jpg" alt="Maillot Barca Retro" class="product-img">
             </div>
             <div class="product-info">
                 <div class="product-meta">
@@ -400,7 +401,7 @@ footer{
 
         <div class="product-card fade-in" data-cat="maillots">
             <div class="product-image-container">
-                <img src="5a98cbeb-3110-4db3-a55f-92bed3b23ec9-1_all_1530.jpg" alt="Maillot OM Retro" class="product-img">
+                <img src="shot.jpg" alt="Maillot OM Retro" class="product-img">
             </div>
             <div class="product-info">
                 <div class="product-meta">
@@ -494,7 +495,7 @@ footer{
             if (pointer.x !== -9999){
                 var dxP = pointer.x - p.x; var dyP = pointer.y - p.y;
                 var distP = Math.sqrt(dxP*dxP + dyP*dyP);
-                if (distP < 120){
+                if (distP < 120 && distP > 0){
                     var f = (120 - distP) / 120;
                     p.x += (dxP / distP) * f * 1.2;
                     p.y += (dyP / distP) * f * 1.2;
@@ -519,6 +520,7 @@ footer{
     })();
 })();
 </script>
+<script src="script.js" defer></script>
 </body>
 </html>
 
