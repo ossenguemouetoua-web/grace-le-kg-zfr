@@ -1,0 +1,8 @@
+# IDEs et éditeurs
+.vscode/
+.vscode-server/
+.DS_Store
+
+# Fichiers temporaires ou système
+*~
+*.log
